@@ -21,3 +21,9 @@ YES_NO = (
     ("Successful", "Successful"),
     ("Unsuccessful", "Unsuccessful")
 )
+
+SALES_STAGES = (
+    ("Suspecting", "Suspecting"), # Contact verification
+    ("Prospecting", "Prospecting"), # Client detail
+    ("Approaching", "Approaching") # Service intro
+)
