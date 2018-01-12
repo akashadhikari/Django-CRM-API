@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from ..models import Clientlist, SalesStage
+from ..models import Clientlist, SalesStage, SalesSub
 from lead.models import LeadProcess
 
 
@@ -34,11 +34,9 @@ class SalesStageTest(TestCase):
         lead = LeadProcess.objects.create(service="Hardware", user=user)
         client = Clientlist.objects.create(client_name="Apple", user = user, lead = lead)
         SalesStage.objects.create(
-            substage = 'Contact verification', sales_stage= 'Suspecting', client = client
-            )
+            substage = 'Contact verification', sales_stage= 'Suspecting', client = client)
         SalesStage.objects.create(
-            substage = 'Client detail', sales_stage='Prospecting', client = client
-            )
+            substage = 'Client detail', sales_stage='Prospecting', client = client)
 
     def test_salesstage_status(self):
         salesstage_suspecting = SalesStage.objects.get(sales_stage='Suspecting')
@@ -47,3 +45,23 @@ class SalesStageTest(TestCase):
             salesstage_suspecting.get_substage(), "Contact verification falls under Suspecting")
         self.assertEqual(
             salesstage_prospecting.get_substage(), "Client detail falls under Prospecting")
+
+# class SalesSubTest(TestCase):
+
+#     def setUp(self):
+#         user = User.objects.create(username="nerd")
+#         lead = LeadProcess.objects.create(service="Hardware", user=user)
+#         client = Clientlist.objects.create(client_name="Apple", user = user, lead = lead)
+#         substage = SalesStage.objects.create(substage="Contact verification", client = client)
+#         SalesSub.objects.create(
+#             sales_substage = 'Verified', substage = substage, client = client)
+#         SalesSub.objects.create(
+#             sales_substage = 'Detailed', substage = substage, client = client)
+
+#     def test_salessubstage_status(self):
+#         salessubstage_verified = SalesSub.objects.get(sales_substage = 'Verified')
+#         salessubstage_detailed = SalesSub.objects.get(sales_substage = 'Detailed')
+#         self.assertEqual(
+#             salessubstage_verified.get_salessubstage(), "Contact verification childrens to Verified")
+#         self.assertEqual(
+#             salessubstage_detailed.get_salessubstage(), "Client detail childrens to Detailed")

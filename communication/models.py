@@ -37,6 +37,9 @@ class SalesSub(models.Model):
     substage = models.ForeignKey(SalesStage, related_name='sub_stage', on_delete=models.DO_NOTHING)
     client = models.ForeignKey(Clientlist, related_name='client_salessub', on_delete=models.DO_NOTHING)
 
+    def get_salessubstage(self):
+        return self.substage.sales_stage + ' childrens to ' + self.sales_substage
+
     def __str__(self):
         return "{}".format(self.sales_substage)
 
