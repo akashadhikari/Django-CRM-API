@@ -4,7 +4,9 @@ from .views import (
     ClientlistViewSet,
     ClientlistDetailsViewSet,
     SalesStageViewSet,
-    SalesStageDetailsViewSet
+    SalesStageDetailsViewSet,
+    SalesSubViewSet,
+    SalesSubDetailsViewSet
     )
 
 
@@ -32,5 +34,17 @@ urlpatterns = [
         r'^api/communication/v1/salesstage/$',
         SalesStageViewSet.as_view(),
         name='get_post_salesstage'
+    ),
+
+    url(
+        r'^api/communication/v1/salessubstage/(?P<pk>[0-9]+)$',
+        SalesSubDetailsViewSet.as_view(),
+        name='get_delete_update_salessubstage'
+    ),
+
+    url(
+        r'^api/communication/v1/salessubstage/$',
+        SalesSubViewSet.as_view(),
+        name='get_post_salessubstage'
     ),
 ]

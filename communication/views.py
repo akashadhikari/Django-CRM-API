@@ -6,8 +6,8 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     )
 from .permissions import IsOwnerOrReadOnly
-from .models import Clientlist, SalesStage
-from .serializers import ClientlistSerializer, SalesStageSerializer
+from .models import Clientlist, SalesStage, SalesSub
+from .serializers import ClientlistSerializer, SalesStageSerializer, SalesSubSerializer
 
 
 class ClientlistViewSet(generics.ListCreateAPIView):
@@ -33,3 +33,14 @@ class SalesStageDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = SalesStage.objects.all()
 	serializer_class = SalesStageSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class SalesSubViewSet(generics.ListCreateAPIView):
+	queryset = SalesSub.objects.all()
+	serializer_class = SalesSubSerializer
+	permission_classes = (IsAuthenticated,)
+
+class SalesSubDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = SalesSub.objects.all()
+	serializer_class = SalesSubSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
