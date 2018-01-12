@@ -22,3 +22,7 @@ class ClientlistTest(TestCase):
             clientlist_apple.get_contact_person(), "Apple is in touch with Mr. Foo Bar")
         self.assertEqual(
             clientlist_orange.get_contact_person(), "Orange is in touch with Mr. Foo Bar")
+
+    def test_contact_person_looks_after_clients(self):
+        new_client = Clientlist.objects.get(client_name="Apple")
+        self.assertEqual(new_client.contact_person, "Mr. Foo Bar")

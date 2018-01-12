@@ -20,3 +20,7 @@ class LeadProcessTest(TestCase):
             leadprocess_software.get_status(), "Software is in Pending status.")
         self.assertEqual(
             leadprocess_hardware.get_status(), "Hardware is in Approved status.")
+
+    def test_get_lead_object_with_association(self):
+        lead_process = LeadProcess.objects.get(service="Hardware")
+        self.assertEqual(lead_process.status, "Approved")

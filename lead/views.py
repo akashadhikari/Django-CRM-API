@@ -5,6 +5,7 @@ from rest_framework.permissions import (
     IsAdminUser,
     IsAuthenticatedOrReadOnly,
     )
+
 from .permissions import IsOwnerOrReadOnly
 from .models import LeadProcess
 from .serializers import LeadProcessSerializer, StatsSerializer
@@ -17,7 +18,7 @@ class LeadProcessViewSet(generics.ListCreateAPIView):
 
 
     def perform_create(self, serializer):
-            serializer.save() # Adding owner=self.request.user
+        serializer.save() # Adding owner=self.request.user
 
 class LeadProcessDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = LeadProcess.objects.all()

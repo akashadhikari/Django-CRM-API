@@ -3,19 +3,10 @@ from django.contrib.auth.models import User
 
 from rest_framework.compat import MinValueValidator, MaxValueValidator
 
+from common.utils import SERVICE_CHOICES, STATUSES
+
 
 class LeadProcess(models.Model):
-
-	SERVICE_CHOICES = (
-		("Hardware", "Hardware"),
-		("Software", "Software"),
-	)
-
-	STATUSES = (
-		("Pending", "Pending"),
-		("Approved", "Approved"),
-	)
-
 
 	user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE) 
 	service = models.CharField(max_length=15, choices=SERVICE_CHOICES)

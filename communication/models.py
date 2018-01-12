@@ -1,20 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from lead.models import LeadProcess
-
-MEDIUM_CHOICES = (
-    ("Inbound Call", "Inbound Call"),
-    ("Outbound Call", "Outbound Call"),
-    ("Inbound Email", "Inbound Email"),
-    ("Outbound Email", "Outbound Email"),
-    ("Inbound Call", "Inbound Call"),
-    ("Outbound Call", "Outbound Call"),
-)
-
-YES_NO = (
-    ("Successful", "Successful"),
-    ("Unsuccessful", "Unsuccessful")
-)
+from common.utils import MEDIUM_CHOICES, YES_NO
 
 class Clientlist(models.Model):
 	
