@@ -79,6 +79,13 @@ class ViewSetMixin(object):
                 handler = getattr(self, action)
                 setattr(self, method, handler)
 
+            if hasattr(self, 'get') and not hasattr(self, 'head'):
+                self.head = self.get
+
+            self.request = request
+            self.args = args
+            self.kwargs = kwargs
+
             # And continue as usual
             return self.dispatch(request, *args, **kwargs)
 

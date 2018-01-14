@@ -6,7 +6,7 @@ on the request, such as form content or json encoded data.
 """
 from __future__ import unicode_literals
 
-import json
+import codecs
 
 from django.conf import settings
 from django.core.files.uploadhandler import StopFutureHandlers
@@ -22,6 +22,8 @@ from django.utils.six.moves.urllib import parse as urlparse
 
 from rest_framework import renderers
 from rest_framework.exceptions import ParseError
+from rest_framework.settings import api_settings
+from rest_framework.utils import json
 
 
 class DataAndFiles(object):
@@ -52,6 +54,7 @@ class JSONParser(BaseParser):
     """
     media_type = 'application/json'
     renderer_class = renderers.JSONRenderer
+    strict = api_settings.STRICT_JSON
 
     def parse(self, stream, media_type=None, parser_context=None):
         """
@@ -61,8 +64,9 @@ class JSONParser(BaseParser):
         encoding = parser_context.get('encoding', settings.DEFAULT_CHARSET)
 
         try:
-            data = stream.read().decode(encoding)
-            return json.loads(data)
+            decoded_stream = codecs.getreader(encoding)(stream)
+            parse_constant = json.strict_constant if self.strict else None
+            return json.load(decoded_stream, parse_constant=parse_constant)
         except ValueError as exc:
             raise ParseError('JSON parse error - %s' % six.text_type(exc))
 

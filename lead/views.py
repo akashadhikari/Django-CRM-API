@@ -6,6 +6,9 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     )
 
+from rest_framework import filters
+import django_filters.rest_framework
+
 from .permissions import IsOwnerOrReadOnly
 from .models import LeadProcess
 from .serializers import LeadProcessSerializer, StatsSerializer
@@ -16,6 +19,13 @@ class LeadProcessViewSet(generics.ListCreateAPIView):
     serializer_class = LeadProcessSerializer
     permission_classes = (IsAuthenticated,)
 
+    filter_backends = (
+        filters.SearchFilter,
+        filters.OrderingFilter,
+        django_filters.rest_framework.DjangoFilterBackend,
+        )
+    filter_fields = ('service', 'user__username')
+    search_fields = ('service', 'user__username')
 
     def perform_create(self, serializer):
         serializer.save() # Adding owner=self.request.user

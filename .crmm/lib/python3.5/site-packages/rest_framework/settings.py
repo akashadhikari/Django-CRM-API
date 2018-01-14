@@ -9,7 +9,8 @@ REST_FRAMEWORK = {
     )
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.TemplateHTMLRenderer',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
     )
 }
 
@@ -18,6 +19,7 @@ REST framework settings, checking for user settings first, then falling
 back to the defaults.
 """
 from __future__ import unicode_literals
+
 from importlib import import_module
 
 from django.conf import settings
@@ -50,7 +52,7 @@ DEFAULTS = {
     'DEFAULT_VERSIONING_CLASS': None,
 
     # Generic view behavior
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': None,
     'DEFAULT_FILTER_BACKENDS': (),
 
     # Throttling
@@ -109,6 +111,7 @@ DEFAULTS = {
     # Encoding
     'UNICODE_JSON': True,
     'COMPACT_JSON': True,
+    'STRICT_JSON': True,
     'COERCE_DECIMAL_TO_STRING': True,
     'UPLOADED_FILES_USE_URL': True,
 

@@ -16,7 +16,6 @@ For example, you might have a `urls.py` that looks something like this:
 from __future__ import unicode_literals
 
 import itertools
-import warnings
 from collections import OrderedDict, namedtuple
 
 from django.conf.urls import url
@@ -26,13 +25,23 @@ from rest_framework import views
 from rest_framework.compat import NoReverseMatch
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.schemas import SchemaGenerator, SchemaView
+from rest_framework.schemas import SchemaGenerator
+from rest_framework.schemas.views import SchemaView
 from rest_framework.settings import api_settings
 from rest_framework.urlpatterns import format_suffix_patterns
 
 Route = namedtuple('Route', ['url', 'mapping', 'name', 'initkwargs'])
 DynamicDetailRoute = namedtuple('DynamicDetailRoute', ['url', 'name', 'initkwargs'])
 DynamicListRoute = namedtuple('DynamicListRoute', ['url', 'name', 'initkwargs'])
+
+
+def escape_curly_brackets(url_path):
+    """
+    Double brackets in regex of url_path for escape string formatting
+    """
+    if ('{' and '}') in url_path:
+        url_path = url_path.replace('{', '{{').replace('}', '}}')
+    return url_path
 
 
 def replace_methodname(format_string, methodname):
@@ -178,6 +187,7 @@ class SimpleRouter(BaseRouter):
                 initkwargs = route.initkwargs.copy()
                 initkwargs.update(method_kwargs)
                 url_path = initkwargs.pop("url_path", None) or methodname
+                url_path = escape_curly_brackets(url_path)
                 url_name = initkwargs.pop("url_name", None) or url_path
                 ret.append(Route(
                     url=replace_methodname(route.url, url_path),
@@ -280,7 +290,7 @@ class APIRootView(views.APIView):
     The default basic root view for DefaultRouter
     """
     _ignore_model_permissions = True
-    exclude_from_schema = True
+    schema = None  # exclude from schema
     api_root_dict = None
 
     def get(self, request, *args, **kwargs):
@@ -316,42 +326,14 @@ class DefaultRouter(SimpleRouter):
     default_schema_renderers = None
     APIRootView = APIRootView
     APISchemaView = SchemaView
+    SchemaGenerator = SchemaGenerator
 
     def __init__(self, *args, **kwargs):
-        if 'schema_title' in kwargs:
-            warnings.warn(
-                "Including a schema directly via a router is now deprecated. "
-                "Use `get_schema_view()` instead.",
-                DeprecationWarning
-            )
-        if 'schema_renderers' in kwargs:
-            assert 'schema_title' in kwargs, 'Missing "schema_title" argument.'
-        if 'schema_url' in kwargs:
-            assert 'schema_title' in kwargs, 'Missing "schema_title" argument.'
-        self.schema_title = kwargs.pop('schema_title', None)
-        self.schema_url = kwargs.pop('schema_url', None)
-        self.schema_renderers = kwargs.pop('schema_renderers', self.default_schema_renderers)
-
         if 'root_renderers' in kwargs:
             self.root_renderers = kwargs.pop('root_renderers')
         else:
             self.root_renderers = list(api_settings.DEFAULT_RENDERER_CLASSES)
         super(DefaultRouter, self).__init__(*args, **kwargs)
-
-    def get_schema_root_view(self, api_urls=None):
-        """
-        Return a schema root view.
-        """
-        schema_generator = SchemaGenerator(
-            title=self.schema_title,
-            url=self.schema_url,
-            patterns=api_urls
-        )
-
-        return self.APISchemaView.as_view(
-            renderer_classes=self.schema_renderers,
-            schema_generator=schema_generator,
-        )
 
     def get_api_root_view(self, api_urls=None):
         """
@@ -372,10 +354,7 @@ class DefaultRouter(SimpleRouter):
         urls = super(DefaultRouter, self).get_urls()
 
         if self.include_root_view:
-            if self.schema_title:
-                view = self.get_schema_root_view(api_urls=urls)
-            else:
-                view = self.get_api_root_view(api_urls=urls)
+            view = self.get_api_root_view(api_urls=urls)
             root_url = url(r'^$', view, name=self.root_view_name)
             urls.append(root_url)
 

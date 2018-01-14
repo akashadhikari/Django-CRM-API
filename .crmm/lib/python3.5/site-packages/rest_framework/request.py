@@ -250,6 +250,10 @@ class Request(object):
             else:
                 self._full_data = self._data
 
+            # copy files refs to the underlying request so that closable
+            # objects are handled appropriately.
+            self._request._files = self._files
+
     def _load_stream(self):
         """
         Return the content body of the request, as a stream.
@@ -299,7 +303,7 @@ class Request(object):
             stream = None
 
         if stream is None or media_type is None:
-            if media_type and not is_form_media_type(media_type):
+            if media_type and is_form_media_type(media_type):
                 empty_data = QueryDict('', encoding=self._request._encoding)
             else:
                 empty_data = {}
@@ -335,7 +339,6 @@ class Request(object):
         """
         Attempt to authenticate the request using each authentication instance
         in turn.
-        Returns a three-tuple of (authenticator, user, authtoken).
         """
         for authenticator in self.authenticators:
             try:
