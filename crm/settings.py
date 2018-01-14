@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'lead',
     'communication',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
