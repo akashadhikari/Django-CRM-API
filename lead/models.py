@@ -24,8 +24,8 @@ class LeadProcess(models.Model):
 
 	### Some custom functions
 
-	def get_status(self):
-		return self.service + ' is in ' + self.status + ' status.'
+	def username(self):
+		return self.user.username
 
 	def hardware_count(self):
 		count_h = LeadProcess.objects.filter(service='Hardware').count()
@@ -37,6 +37,9 @@ class LeadProcess(models.Model):
 
 	def grand_total(self):
 		return (self.income - self.discount + (self.tax_percent*self.income)/100)
+
+	def get_status(self):
+		return self.service + ' is in ' + self.status + ' status.'
 
 	def __str__(self):
 			return "{} at stage {}".format(self.service, self.stage)
