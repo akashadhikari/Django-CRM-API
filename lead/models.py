@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from rest_framework.compat import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from common.utils import SERVICE_CHOICES, STATUSES
 
