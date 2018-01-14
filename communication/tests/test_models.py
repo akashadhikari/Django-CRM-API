@@ -34,9 +34,9 @@ class SalesStageTest(TestCase):
         lead = LeadProcess.objects.create(service="Hardware", user=user)
         client = Clientlist.objects.create(client_name="Apple", user = user, lead = lead)
         SalesStage.objects.create(
-            substage = 'Contact verification', sales_stage= 'Suspecting', client = client)
+            substage = 'Contact verification', sales_stage= 'Suspecting', client = client, user = user)
         SalesStage.objects.create(
-            substage = 'Client detail', sales_stage='Prospecting', client = client)
+            substage = 'Client detail', sales_stage='Prospecting', client = client, user = user)
 
     def test_salesstage_status(self):
         salesstage_suspecting = SalesStage.objects.get(sales_stage='Suspecting')

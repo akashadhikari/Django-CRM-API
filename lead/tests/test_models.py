@@ -28,3 +28,21 @@ class LeadProcessTest(TestCase):
     def test_service_is_at_respective_stage(self):
         client = LeadProcess.objects.get(service = "Software")
         self.assertEqual(client.stage, 3)
+
+# Login test
+
+class UserTest(TestCase):
+
+    def setUp(self):
+        User.objects.create(
+            username="akash", password="iamadangerousman")
+        User.objects.create(
+            username="ram", password="ramshyam")
+
+    def test_sample_user_login(self):
+        user_akash = User.objects.get(username='akash')
+        self.assertEqual(user_akash.password, "iamadangerousman")
+    
+    def test_user_ram_login(self):
+        user_ram = User.objects.get(username='ram')
+        self.assertEqual(user_ram.password, 'ramshyam')
