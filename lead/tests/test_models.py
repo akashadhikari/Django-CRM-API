@@ -1,5 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+
+from rest_framework.authtoken.models import Token
+
 from ..models import LeadProcess
 
 
@@ -44,5 +47,10 @@ class UserTest(TestCase):
         self.assertEqual(user_akash.password, "iamadangerousman")
     
     def test_user_ram_login(self):
-        user_ram = User.objects.get(username='ram')
-        self.assertEqual(user_ram.password, 'ramshyam')
+        user_ram = User.objects.get(username="ram")
+        self.assertEqual(user_ram.password, "ramshyam")
+
+    # def test_token(self):
+    #     user = User.objects.create(username="khaikoho")
+    #     user_akash = Token.objects.get(user=user)
+    #     self.assertEqual(user_akash.key, "kaka")
