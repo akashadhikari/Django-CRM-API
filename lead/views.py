@@ -1,3 +1,5 @@
+import django_filters.rest_framework
+
 from rest_framework import generics
 from rest_framework.permissions import (
     AllowAny,
@@ -7,7 +9,6 @@ from rest_framework.permissions import (
     )
 
 from rest_framework import filters
-import django_filters.rest_framework
 
 from .permissions import IsOwnerOrReadOnly
 from .models import LeadProcess
@@ -24,8 +25,8 @@ class LeadProcessViewSet(generics.ListCreateAPIView):
         filters.OrderingFilter,
         django_filters.rest_framework.DjangoFilterBackend,
         )
-    filter_fields = ('service', 'user__username')
-    search_fields = ('service', 'user__username')
+    filter_fields = ('service_type', 'user__username')
+    search_fields = ('service_type', 'user__username')
 
     def perform_create(self, serializer):
         serializer.save() # Adding owner=self.request.user
@@ -36,6 +37,6 @@ class LeadProcessDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
 class StatsViewSet(generics.ListCreateAPIView):
-    queryset = LeadProcess.objects.all() # LeadProcess.objects.filter(service='Hardware').count()
+    queryset = LeadProcess.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
     serializer_class = StatsSerializer
     permission_classes = (IsAuthenticated,)
