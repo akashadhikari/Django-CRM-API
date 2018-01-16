@@ -7,6 +7,7 @@ class Clientlist(models.Model):
 	
 	client_name = models.CharField(max_length=255, blank=False)
 	user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE)
+	client_pic = models.ImageField(upload_to = '.common/files/images', default = '.common/files/images/display.png')
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_modified = models.DateTimeField(auto_now=True)
 	medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)

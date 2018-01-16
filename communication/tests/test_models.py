@@ -11,7 +11,7 @@ class ClientlistTest(TestCase):
         user = User.objects.create(username="nerd")
         lead = LeadProcess.objects.create(service_type="Hardware", user=user)
         Clientlist.objects.create(
-            client_name='Apple', contact_person='Mr. Foo Bar', user=user, lead=lead)
+            client_name='Apple', contact_person='Mr. Foo Bar', client_pic='.common/files/images/display.png', user=user, lead=lead)
         Clientlist.objects.create(
             client_name='Orange', contact_person='Mr. Foo Bar', user=user, lead=lead)
 

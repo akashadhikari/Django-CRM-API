@@ -25,8 +25,8 @@ class LeadProcessViewSet(generics.ListCreateAPIView):
         filters.OrderingFilter,
         django_filters.rest_framework.DjangoFilterBackend,
         )
-    filter_fields = ('service_type', 'user__username')
-    search_fields = ('service_type', 'user__username')
+    filter_fields = ('employer_name', 'service_type', 'user__username')
+    search_fields = ('employer_name', 'service_type', 'user__username')
 
     def perform_create(self, serializer):
         serializer.save() # Adding owner=self.request.user

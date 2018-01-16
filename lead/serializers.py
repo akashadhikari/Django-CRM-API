@@ -23,7 +23,7 @@ class LeadProcessSerializer(serializers.ModelSerializer):
         	'discount', 
         	'vat_percent', 
         	'total_amount', 
-        	#'total_invoicing_amount',
+        	'total_invoicing_amount',
         	'last_communicated',
         	'last_status',
         	'last_service_taken',

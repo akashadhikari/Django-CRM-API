@@ -8,7 +8,7 @@ from common.utils import (
 	POST_CHOICES,
 	DISCOUNT_ENTRY_CHOICES,
 	LAST_STATUS_CHOICES
-	)
+)
 
 
 class LeadProcess(models.Model):
@@ -37,7 +37,7 @@ class LeadProcess(models.Model):
 	discount = models.IntegerField(default=0) # flat or percentage
 	vat_percent = models.PositiveIntegerField(default=13)
 
-	# :::DISPLAY CLIENT BASIC BEHAVIOUR:::
+	# :::DISPLAY CLIENT'S BASIC BEHAVIOUR:::
 
 	last_communicated = models.DateField(auto_now=True)
 	last_status = models.CharField(max_length=15, choices=LAST_STATUS_CHOICES)
@@ -58,7 +58,7 @@ class LeadProcess(models.Model):
 
 	# !!!slight modifications needed for this method!!!
 	def total_invoicing_amount(self):
-		return (self.amount + self.vat_percent*self.amount/100)
+		return (self.total_amount() + self.vat_percent*self.total_amount()/100)
 
 	def username(self): # defined for serializer
 		return self.user.username
