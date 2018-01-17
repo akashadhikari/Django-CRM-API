@@ -25,8 +25,8 @@ class ClientDetailViewSet(generics.ListCreateAPIView):
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
 		)
-	filter_fields = ('client_name', 'medium')
-	search_fields = ('client_name', 'medium', 'user__username')
+	filter_fields = ('client_name', 'organisation_name')
+	search_fields = ('client_name', 'organisation_name', 'user__username')
 
 
 	def perform_create(self, serializer):

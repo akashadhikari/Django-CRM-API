@@ -35,6 +35,14 @@ DISCOUNT_ENTRY_CHOICES = (
 
 # COMMUNICATION MODEL ALL CHOICES LIST
 
+EMPLOYEE_SIZE_CHOICES = (
+    ("1-10", "1-10"),
+    ("10-50", "10-50"),
+    ("50-100", "50-100"),
+    ("100-500", "100-500"),
+    ("500+", "500+")
+)
+
 MEDIUM_CHOICES = (
     ("Inbound Call", "Inbound Call"),
     ("Outbound Call", "Outbound Call"),

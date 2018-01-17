@@ -13,13 +13,13 @@ from .views import (
 urlpatterns = [
 
     url(
-        r'^api/communication/v1/clientinfo/(?P<pk>[0-9]+)$',
+        r'^api/communication/v1/clientdetail/(?P<pk>[0-9]+)$',
         ClientDetailDetailsViewSet.as_view(),
         name='get_delete_update_clientdetail'
     ),
 
     url(
-        r'^api/communication/v1/clientinfo/$',
+        r'^api/communication/v1/clientdetail/$',
         ClientDetailViewSet.as_view(),
         name='get_post_clientdetail'
     ),
