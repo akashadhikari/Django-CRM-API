@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Clientlist, SalesStage, SalesSub
+from .models import ClientDetail, SalesStage, SalesSub
 
 
-class ClientlistSerializer(serializers.ModelSerializer):
+class ClientDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Clientlist
+        model = ClientDetail
         fields = '__all__'
 
 class SalesStageSerializer(serializers.ModelSerializer):

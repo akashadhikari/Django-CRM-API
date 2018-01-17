@@ -1,30 +1,30 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from ..models import Clientlist, SalesStage, SalesSub
+from ..models import ClientDetail, SalesStage, SalesSub
 from lead.models import LeadProcess
 
 
-class ClientlistTest(TestCase):
-    """ Test module for Clientlist model """
+class ClientDetailTest(TestCase):
+    """ Test module for ClientDetail model """
 
     def setUp(self):
         user = User.objects.create(username="nerd")
         lead = LeadProcess.objects.create(service_type="Hardware", user=user)
-        Clientlist.objects.create(
-            client_name='Apple', contact_person='Mr. Foo Bar', client_pic='.common/files/images/display.png', user=user, lead=lead)
-        Clientlist.objects.create(
+        ClientDetail.objects.create(
+            client_name='Apple', contact_person='Mr. Foo Bar', client_pic='common/files/images/display.png', user=user, lead=lead)
+        ClientDetail.objects.create(
             client_name='Orange', contact_person='Mr. Foo Bar', user=user, lead=lead)
 
-    def test_clientlist_status(self):
-        clientlist_apple = Clientlist.objects.get(client_name='Apple')
-        clientlist_orange = Clientlist.objects.get(client_name='Orange')
+    def test_ClientDetail_status(self):
+        clientdetail_apple = ClientDetail.objects.get(client_name='Apple')
+        clientdetail_orange = ClientDetail.objects.get(client_name='Orange')
         self.assertEqual(
-            clientlist_apple.get_contact_person(), "Apple is in touch with Mr. Foo Bar")
+            clientdetail_apple.get_contact_person(), "Apple is in touch with Mr. Foo Bar")
         self.assertEqual(
-            clientlist_orange.get_contact_person(), "Orange is in touch with Mr. Foo Bar")
+            clientdetail_orange.get_contact_person(), "Orange is in touch with Mr. Foo Bar")
 
     def test_contact_person_looks_after_clients(self):
-        new_client = Clientlist.objects.get(client_name="Apple")
+        new_client = ClientDetail.objects.get(client_name="Apple")
         self.assertEqual(new_client.contact_person, "Mr. Foo Bar")
 
 class SalesStageTest(TestCase):
@@ -32,7 +32,7 @@ class SalesStageTest(TestCase):
     def setUp(self):
         user = User.objects.create(username="nerd")
         lead = LeadProcess.objects.create(service_type="Hardware", user=user)
-        client = Clientlist.objects.create(client_name="Apple", user = user, lead = lead)
+        client = ClientDetail.objects.create(client_name="Apple", user = user, lead = lead)
         SalesStage.objects.create(
             substage = 'Contact verification', sales_stage= 'Suspecting', client = client, user = user)
         SalesStage.objects.create(
@@ -51,7 +51,7 @@ class SalesStageTest(TestCase):
 #     def setUp(self):
 #         user = User.objects.create(username="nerd")
 #         lead = LeadProcess.objects.create(service_type="Hardware", user=user)
-#         client = Clientlist.objects.create(client_name="Apple", user = user, lead = lead)
+#         client = ClientDetail.objects.create(client_name="Apple", user = user, lead = lead)
 #         substage = SalesStage.objects.create(substage="Contact verification", client = client)
 #         SalesSub.objects.create(
 #             sales_substage = 'Verified', substage = substage, client = client)

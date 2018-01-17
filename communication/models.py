@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from lead.models import LeadProcess
 from common.utils import MEDIUM_CHOICES, YES_NO, SALES_STAGES
 
-class Clientlist(models.Model):
+class ClientDetail(models.Model):
 	
 	client_name = models.CharField(max_length=255, blank=False)
 	user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE)
@@ -25,7 +25,7 @@ class Clientlist(models.Model):
 class SalesStage(models.Model):
 	substage = models.CharField(max_length=100)
 	sales_stage = models.CharField(max_length=100, choices=SALES_STAGES)
-	client = models.ForeignKey(Clientlist, related_name='client_sales', on_delete=models.DO_NOTHING)
+	client = models.ForeignKey(ClientDetail, related_name='client_sales', on_delete=models.DO_NOTHING)
 	user = models.ForeignKey(User, related_name='users_salesstage', on_delete=models.CASCADE)
 
 	def get_substage(self):
@@ -37,7 +37,7 @@ class SalesStage(models.Model):
 class SalesSub(models.Model):
 	sales_substage = models.CharField(max_length=100, blank=False)
 	substage = models.ForeignKey(SalesStage, related_name='sub_stage', on_delete=models.DO_NOTHING)
-	client = models.ForeignKey(Clientlist, related_name='client_salessub', on_delete=models.DO_NOTHING)
+	client = models.ForeignKey(ClientDetail, related_name='client_salessub', on_delete=models.DO_NOTHING)
 	user = models.ForeignKey(User, related_name='users_salessub', on_delete=models.CASCADE)
 
 	def get_salessubstage(self):
@@ -47,9 +47,9 @@ class SalesSub(models.Model):
 		return "{}".format(self.sales_substage)
 
 	def inbound_call(self):
-		inbound = Clientlist.objects.filter(medium='Inbound Call').count()
+		inbound = ClientDetail.objects.filter(medium='Inbound Call').count()
 		return inbound
 		
 	def outbound_call(self):
-		outbound = Clientlist.objects.filter(medium='Outbound Call').count()
+		outbound = ClientDetail.objects.filter(medium='Outbound Call').count()
 		return outbound

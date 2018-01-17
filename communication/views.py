@@ -11,13 +11,13 @@ import django_filters.rest_framework
 
 
 from .permissions import IsOwnerOrReadOnly
-from .models import Clientlist, SalesStage, SalesSub
-from .serializers import ClientlistSerializer, SalesStageSerializer, SalesSubSerializer
+from .models import ClientDetail, SalesStage, SalesSub
+from .serializers import ClientDetailSerializer, SalesStageSerializer, SalesSubSerializer
 
 
-class ClientlistViewSet(generics.ListCreateAPIView):
-	queryset = Clientlist.objects.all()
-	serializer_class = ClientlistSerializer
+class ClientDetailViewSet(generics.ListCreateAPIView):
+	queryset = ClientDetail.objects.all()
+	serializer_class = ClientDetailSerializer
 	permission_classes = (IsAuthenticated,)
 
 	filter_backends = (
@@ -32,9 +32,9 @@ class ClientlistViewSet(generics.ListCreateAPIView):
 	def perform_create(self, serializer):
 			serializer.save() # Adding owner=self.request.user
 
-class ClientlistDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Clientlist.objects.all()
-	serializer_class = ClientlistSerializer
+class ClientDetailDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ClientDetail.objects.all()
+	serializer_class = ClientDetailSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
 class SalesStageViewSet(generics.ListCreateAPIView):
