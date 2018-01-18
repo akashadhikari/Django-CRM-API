@@ -9,6 +9,31 @@ from common.utils import (
 	SALES_STAGES
 	)
 
+# BRANCHES
+
+class Branch(models.Model):
+
+	branch_incharge = models.CharField(max_length=255, blank=False)
+	branch_address = models.CharField(max_length=255, blank=False)
+	branch_phone = models.CharField(max_length=255, blank=False)
+	branch_email = models.EmailField(max_length=100, blank=False)
+
+# BUSINESS OUTFLOW
+
+class BusinessOutflow(models.Model):
+	outflowed_to = models.CharField(max_length=255, blank=False)
+	service_outflowed = models.CharField(max_length=255, blank=False)
+	outflow_date = models.DateField(blank=False)
+	amount = models.PositiveIntegerField(default=0)
+	# attachment image
+
+# LIST OF PRODUCT/SERVICES
+
+class ListService(models.Model):
+	service_name = models.CharField(max_length=255, blank=False)
+	service_detail = models.CharField(max_length=255, blank=False)
+	# attachment image
+
 class ClientDetail(models.Model):
 
 	user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE)
@@ -72,29 +97,6 @@ class ClientDetail(models.Model):
 	def __str__(self):
 		return "{}".format(self.client_name)
 
-# BUSINESS OUTFLOW
-
-class BusinessOutflow(models.Model):
-	outflowed_to = models.CharField(max_length=255, blank=False)
-	service_outflowed = models.CharField(max_length=255, blank=False)
-	outflow_date = models.DateField(blank=False)
-	amount = models.PositiveIntegerField(default=0)
-	# attachment image
-
-# LIST OF PRODUCT/SERVICES
-
-class ListService(models.Model):
-	service_name = models.CharField(max_length=255, blank=False)
-	service_detail = models.CharField(max_length=255, blank=False)
-	# attachment image
-
-# BRANCHES
-
-class Branch(models.Model):
-	branch_incharge = models.CharField(max_length=255, blank=False)
-	branch_address = models.CharField(max_length=255, blank=False)
-	branch_phone = models.CharField(max_length=255, blank=False)
-	branch_email = models.EmailField(max_length=100, blank=False)
 
 class SalesStage(models.Model):
 	substage = models.CharField(max_length=100)
