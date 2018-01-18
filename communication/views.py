@@ -30,7 +30,7 @@ from .serializers import (
 class BranchViewSet(generics.ListCreateAPIView):
 	queryset = Branch.objects.all()
 	serializer_class = BranchSerializer
-	permission_classes = (IsAuthenticated,)
+	#permission_classes = (IsAuthenticated,)
 
 	filter_backends = (
 		filters.SearchFilter, 
@@ -52,7 +52,7 @@ class BranchDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 class BusinessOutflowViewSet(generics.ListCreateAPIView):
 	queryset = BusinessOutflow.objects.all()
 	serializer_class = BusinessOutflowSerializer
-	permission_classes = (IsAuthenticated,)
+	#permission_classes = (IsAuthenticated,)
 
 	filter_backends = (
 		filters.SearchFilter, 
@@ -74,7 +74,7 @@ class BusinessOutflowDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 class ListServiceViewSet(generics.ListCreateAPIView):
 	queryset = ListService.objects.all()
 	serializer_class = ListServiceSerializer
-	permission_classes = (IsAuthenticated,)
+	#permission_classes = (IsAuthenticated,)
 
 	filter_backends = (
 		filters.SearchFilter, 
