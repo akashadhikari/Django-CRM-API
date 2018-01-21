@@ -5,7 +5,7 @@ from .models import Album, Track
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ('id', 'user', 'album', 'order', 'title', 'duration')
+        fields = ('user', 'album', 'order', 'title', 'duration')
 
 class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True)
@@ -20,3 +20,8 @@ class AlbumSerializer(serializers.ModelSerializer):
         for track_data in tracks_data:
             Track.objects.create(album=album, **track_data)
         return album
+
+    def update(self, instance, validated_data):
+    	instance.album_name = validated_data.get('album_name', instance.album_name)
+    	instance.artist = validated_data.get('artist', instance.artist)
+    	instance.save()
