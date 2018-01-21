@@ -2,6 +2,9 @@ from django.conf.urls import url
 
 from .views import (
 
+    UserViewSet,
+    UserDetailsViewSet,
+
     AlbumViewSet,
     AlbumDetailsViewSet,
 
@@ -11,6 +14,18 @@ from .views import (
 )
 
 urlpatterns = [
+
+    url(
+        r'^api/common/v1/user/(?P<pk>[0-9]+)$',
+        UserDetailsViewSet.as_view(),
+        name='get_delete_update_user'
+    ),
+
+    url(
+        r'^api/common/v1/user/$',
+        UserViewSet.as_view(),
+        name='get_post_user'
+    ),
 
     url(
         r'^api/common/v1/album/(?P<pk>[0-9]+)$',
