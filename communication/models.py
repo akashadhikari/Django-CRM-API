@@ -12,7 +12,7 @@ from common.utils import (
 # BRANCHES
 
 class Branch(models.Model):
-
+	user = models.ForeignKey(User, related_name='users_branch', on_delete=models.CASCADE)
 	branch_incharge = models.CharField(max_length=255, blank=False)
 	branch_address = models.CharField(max_length=255, blank=False)
 	branch_phone = models.CharField(max_length=255, blank=False)
@@ -21,6 +21,7 @@ class Branch(models.Model):
 # BUSINESS OUTFLOW
 
 class BusinessOutflow(models.Model):
+	user = models.ForeignKey(User, related_name='users_businessoutflow', on_delete=models.CASCADE)
 	outflowed_to = models.CharField(max_length=255, blank=False)
 	service_outflowed = models.CharField(max_length=255, blank=False)
 	outflow_date = models.DateField(blank=False)
@@ -30,6 +31,7 @@ class BusinessOutflow(models.Model):
 # LIST OF PRODUCT/SERVICES
 
 class ListService(models.Model):
+	user = models.ForeignKey(User, related_name='users_listservice', on_delete=models.CASCADE)
 	service_name = models.CharField(max_length=255, blank=False)
 	service_detail = models.CharField(max_length=255, blank=False)
 	# attachment image
