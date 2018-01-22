@@ -14,7 +14,7 @@ from common.utils import (
 
 class AddCommunication(models.Model):
 
-	client_name = models.ForeignKey(User, related_name='clientname', on_delete=models.CASCADE)
+	user = models.ForeignKey(User, related_name='user_addcommunication', on_delete=models.CASCADE)
 	contact_person = models.CharField(max_length=255, blank=False)
 	medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)
 	sales_stage = models.CharField(max_length=255, choices=SALES_STAGE_CHOICES)
