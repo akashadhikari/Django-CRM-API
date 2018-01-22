@@ -1,6 +1,7 @@
 import django_filters.rest_framework
 
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -18,7 +19,9 @@ from .serializers import LeadProcessSerializer, StatsSerializer
 class LeadProcessViewSet(generics.ListCreateAPIView):
     queryset = LeadProcess.objects.all()
     serializer_class = LeadProcessSerializer
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = [TokenAuthentication]
+
+
 
     filter_backends = (
         filters.SearchFilter,
@@ -35,8 +38,9 @@ class LeadProcessDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = LeadProcess.objects.all()
     serializer_class = LeadProcessSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+    authentication_classes = [TokenAuthentication]
+
 
 class StatsViewSet(generics.ListCreateAPIView):
     queryset = LeadProcess.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
     serializer_class = StatsSerializer
-    permission_classes = (IsAuthenticated,)
