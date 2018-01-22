@@ -1,5 +1,6 @@
 import django_filters.rest_framework
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import (
 	AllowAny,
 	IsAuthenticated,
@@ -27,6 +28,7 @@ class AddClientViewSet(generics.ListCreateAPIView):
 	queryset = AddClient.objects.all()
 	serializer_class = AddClientSerializer
 	permission_classes = (IsAuthenticated,)
+	authentication_classes = [TokenAuthentication]
 
 	filter_backends = (
 		filters.SearchFilter, 
