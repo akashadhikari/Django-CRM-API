@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Django Apps
     'lead',
     'communication',
+    'client',
     'common'
 ]
 

@@ -9,6 +9,8 @@ urlpatterns = [
 
     url(r'^', include('communication.urls')),
 
+	url(r'^', include('client.urls')),    
+
     url(r'^', include('common.urls')),
 
     url(

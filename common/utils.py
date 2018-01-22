@@ -33,7 +33,7 @@ DISCOUNT_ENTRY_CHOICES = (
     ("Percentage", "Percentage")
 )
 
-# COMMUNICATION MODEL ALL CHOICES LIST
+# CLIENT ADDITION CHOICES
 
 EMPLOYEE_SIZE_CHOICES = (
     ("1-10", "1-10"),
@@ -43,22 +43,22 @@ EMPLOYEE_SIZE_CHOICES = (
     ("500+", "500+")
 )
 
+# COMMUNICATION CHOICES
+
 MEDIUM_CHOICES = (
     ("Inbound Call", "Inbound Call"),
     ("Outbound Call", "Outbound Call"),
     ("Inbound Email", "Inbound Email"),
     ("Outbound Email", "Outbound Email"),
-    ("Inbound Call", "Inbound Call"),
-    ("Outbound Call", "Outbound Call"),
+    ("SMS", "SMS"),
+    ("Meeting", "Meeting"),
 )
 
-YES_NO = (
-    ("Successful", "Successful"),
-    ("Unsuccessful", "Unsuccessful")
-)
-
-SALES_STAGES = (
-    ("Suspecting", "Suspecting"), # Contact verification
-    ("Prospecting", "Prospecting"), # Client detail
-    ("Approaching", "Approaching") # Service intro
+SALES_STAGE_CHOICES = (
+    ("Suspecting", "Suspecting"),
+    ("Prospecting", "Prospecting"),
+    ("Approaching", "Approaching"),
+    ("Negotiation", "Negotiation"),
+    ("Sales Lead", "Sales Lead"),
+    ("Value Proposition", "Value Proposition")
 )

@@ -10,7 +10,7 @@ from rest_framework.permissions import (
 	)
 from rest_framework import filters
 
-from .permissions import IsOwnerOrReadOnly, IsLoggedInWithSameUsername
+from .permissions import IsOwnerOrReadOnly, IsSameUser
 from .models import (
 	Album,
 	Track,
@@ -24,11 +24,12 @@ from .serializers import (
 class UserViewSet(generics.ListCreateAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
+	permission_classes = (IsAuthenticated,)
 
 class UserDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
-	permission_classes = (IsAuthenticated, IsLoggedInWithSameUsername)
+	permission_classes = (IsAuthenticated, IsSameUser)
 
 class AlbumViewSet(generics.ListCreateAPIView):
 	queryset = Album.objects.all()
