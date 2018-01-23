@@ -12,6 +12,7 @@ from common.utils import (
 
 #################################################### COMMUNICATION MODEL ####################################################
 
+
 class AddCommunication(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_addcommunication', on_delete=models.CASCADE)
@@ -27,16 +28,46 @@ class Suspecting(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_suspecting', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_suspecting', on_delete=models.CASCADE)
-	communications = models.ForeignKey(AddCommunication, related_name='add_comunications', on_delete=models.CASCADE)
+	communication = models.ForeignKey(AddCommunication, related_name='communication_suspecting', on_delete=models.CASCADE)
 	contact_verification = models.CharField(max_length=255, blank=False)
 
 class Prospecting(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_prospecting', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_prospecting', on_delete=models.CASCADE)
+	communication = models.ForeignKey(AddCommunication, related_name='communication_prospecting', on_delete=models.CASCADE)
 	showed_interest_for_later = models.DateField()
 	preferred_competitors = models.CharField(max_length=255, blank=False)
 	not_interested = models.BooleanField(default=False)
 	dont_call_again = models.BooleanField(default=False)
 	interest_in_other_HR = models.BooleanField(default=False)
 	remarks = models.TextField(max_length=999, blank=False)
+
+class Approaching(models.Model):
+
+	user = models.ForeignKey(User, related_name='user_approaching', on_delete=models.CASCADE)
+	communication = models.ForeignKey(AddCommunication, related_name='communication_approaching', on_delete=models.CASCADE)
+	service_introduction = models.CharField(max_length=255, blank=False)
+	business_renewal = models.CharField(max_length=255, blank=False)
+	submit_proposal = models.CharField(max_length=255, blank=False)
+	presentation = models.CharField(max_length=255, blank=False)
+
+class Negotiation(models.Model):
+
+	user = models.ForeignKey(User, related_name='user_negotiation', on_delete=models.CASCADE)
+	communication = models.ForeignKey(AddCommunication, related_name='communication_negotiation', on_delete=models.CASCADE)
+	service_discussion = models.CharField(max_length=255, blank=False)
+	discount_discussion = models.CharField(max_length=255, blank=False)
+
+class SalesLead(models.Model):
+
+	user = models.ForeignKey(User, related_name='user_saleslead', on_delete=models.CASCADE)
+	lead_generation = models.BooleanField(default=False)
+	invoice_approval = models.CharField(max_length=255, blank=False)
+	job_post = models.CharField(max_length=255, blank=False)
+	pre_design = models.CharField(max_length=255, blank=False)
+	approval_on_progress = models.CharField(max_length=255, blank=False)
+	billing_process = models.CharField(max_length=255, blank=False)
+	payment_on_progress = models.CharField(max_length=255, blank=False)
+	payment_received = models.CharField(max_length=255, blank=False)
+	payment_verified = models.CharField(max_length=255, blank=False)

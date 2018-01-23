@@ -13,17 +13,24 @@ from .permissions import IsOwnerOrReadOnly
 from .models import (
 	AddCommunication,
 	Suspecting,
-	Prospecting
+	Prospecting,
+	Approaching,
+	Negotiation
 	)
 from .serializers import (
-	AddCommunicationSerializer,
+	AddCommunicationSuspectingSerializer,
+	AddCommunicationProspectingSerializer,
+	AddCommunicationApproachingSerializer,
+	AddCommunicationNegotiationSerializer,
 	SuspectingSerializer,
-	ProspectingSerializer
+	ProspectingSerializer,
+	ApproachingSerializer,
+	NegotiationSerializer
 	)
 
-class AddCommunicationViewSet(generics.ListCreateAPIView):
+class AddCommunicationNegotiationViewSet(generics.ListCreateAPIView):
 	queryset = AddCommunication.objects.all()
-	serializer_class = AddCommunicationSerializer
+	serializer_class = AddCommunicationNegotiationSerializer
 	permission_classes = (IsAuthenticated,)
 
 	filter_backends = (
@@ -31,16 +38,82 @@ class AddCommunicationViewSet(generics.ListCreateAPIView):
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
 		)
-	filter_fields = ('medium', 'contact_person')
-	search_fields = ('medium', 'contact_person')
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
 
 
 	def perform_create(self, serializer):
 			serializer.save() # Adding owner=self.request.user
 
-class AddCommunicationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+class AddCommunicationNegotiationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = AddCommunication.objects.all()
-	serializer_class = AddCommunicationSerializer
+	serializer_class = AddCommunicationNegotiationSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class AddCommunicationApproachingViewSet(generics.ListCreateAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationApproachingSerializer
+	permission_classes = (IsAuthenticated,)
+
+	filter_backends = (
+		filters.SearchFilter, 
+		filters.OrderingFilter, 
+		django_filters.rest_framework.DjangoFilterBackend,
+		)
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
+
+
+	def perform_create(self, serializer):
+			serializer.save() # Adding owner=self.request.user
+
+class AddCommunicationApproachingDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationApproachingSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class AddCommunicationProspectingViewSet(generics.ListCreateAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationProspectingSerializer
+	permission_classes = (IsAuthenticated,)
+
+	filter_backends = (
+		filters.SearchFilter, 
+		filters.OrderingFilter, 
+		django_filters.rest_framework.DjangoFilterBackend,
+		)
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
+
+
+	def perform_create(self, serializer):
+			serializer.save() # Adding owner=self.request.user
+
+class AddCommunicationProspectingDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationProspectingSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class AddCommunicationSuspectingViewSet(generics.ListCreateAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationSuspectingSerializer
+	permission_classes = (IsAuthenticated,)
+
+	filter_backends = (
+		filters.SearchFilter, 
+		filters.OrderingFilter, 
+		django_filters.rest_framework.DjangoFilterBackend,
+		)
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
+
+
+	def perform_create(self, serializer):
+			serializer.save() # Adding owner=self.request.user
+
+class AddCommunicationSuspectingDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = AddCommunication.objects.all()
+	serializer_class = AddCommunicationSuspectingSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
 class SuspectingViewSet(generics.ListCreateAPIView):
@@ -85,4 +158,48 @@ class ProspectingViewSet(generics.ListCreateAPIView):
 class ProspectingDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Prospecting.objects.all()
 	serializer_class = ProspectingSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class ApproachingViewSet(generics.ListCreateAPIView):
+	queryset = Approaching.objects.all()
+	serializer_class = ApproachingSerializer
+	permission_classes = (IsAuthenticated,)
+
+	filter_backends = (
+		filters.SearchFilter, 
+		filters.OrderingFilter, 
+		django_filters.rest_framework.DjangoFilterBackend,
+		)
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
+
+
+	def perform_create(self, serializer):
+			serializer.save() # Adding owner=self.request.user
+
+class ApproachingDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Approaching.objects.all()
+	serializer_class = ApproachingSerializer
+	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class NegotiationViewSet(generics.ListCreateAPIView):
+	queryset = Negotiation.objects.all()
+	serializer_class = NegotiationSerializer
+	permission_classes = (IsAuthenticated,)
+
+	filter_backends = (
+		filters.SearchFilter, 
+		filters.OrderingFilter, 
+		django_filters.rest_framework.DjangoFilterBackend,
+		)
+	# filter_fields = ('medium', 'contact_person')
+	# search_fields = ('medium', 'contact_person')
+
+
+	def perform_create(self, serializer):
+			serializer.save() # Adding owner=self.request.user
+
+class NegotiationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Negotiation.objects.all()
+	serializer_class = NegotiationSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
