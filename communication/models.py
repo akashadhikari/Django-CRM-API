@@ -46,6 +46,7 @@ class Prospecting(models.Model):
 class Approaching(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_approaching', on_delete=models.CASCADE)
+	client = models.ForeignKey(AddClient, related_name='client_approaching', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_approaching', on_delete=models.CASCADE)
 	service_introduction = models.CharField(max_length=255, blank=False)
 	business_renewal = models.CharField(max_length=255, blank=False)
@@ -55,6 +56,7 @@ class Approaching(models.Model):
 class Negotiation(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_negotiation', on_delete=models.CASCADE)
+	client = models.ForeignKey(AddClient, related_name='client_negotiation', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_negotiation', on_delete=models.CASCADE)
 	service_discussion = models.CharField(max_length=255, blank=False)
 	discount_discussion = models.CharField(max_length=255, blank=False)
@@ -62,6 +64,8 @@ class Negotiation(models.Model):
 class SalesLead(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_saleslead', on_delete=models.CASCADE)
+	client = models.ForeignKey(AddClient, related_name='client_saleslead', on_delete=models.CASCADE)
+	communication = models.ForeignKey(AddCommunication, related_name='communication_saleslead', on_delete=models.CASCADE)
 	lead_generation = models.BooleanField(default=False)
 	invoice_approval = models.CharField(max_length=255, blank=False)
 	job_post = models.CharField(max_length=255, blank=False)
