@@ -28,7 +28,7 @@ class AddClientViewSet(generics.ListCreateAPIView):
 	queryset = AddClient.objects.all()
 	serializer_class = AddClientSerializer
 	permission_classes = (IsAuthenticated,)
-	authentication_classes = [TokenAuthentication]
+	#authentication_classes = [TokenAuthentication]
 
 	filter_backends = (
 		filters.SearchFilter, 
