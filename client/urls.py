@@ -19,6 +19,6 @@ urlpatterns = [
     url(
         r'^api/v1/client/addclient/$',
         AddClientViewSet.as_view(),
-        name='get_post_addClient'
+        name='get_post_addclient'
     )
 ]

@@ -9,6 +9,7 @@ from rest_framework.permissions import (
 
 from rest_framework import filters
 
+from common.filters import DateRangeFilter
 from .permissions import IsOwnerOrReadOnly
 from .models import (
 	AddCommunication,
@@ -25,7 +26,8 @@ from .serializers import (
 	SuspectingSerializer,
 	ProspectingSerializer,
 	ApproachingSerializer,
-	NegotiationSerializer
+	NegotiationSerializer,
+	StatsSerializer
 	)
 
 class AddCommunicationNegotiationViewSet(generics.ListCreateAPIView):
@@ -37,6 +39,7 @@ class AddCommunicationNegotiationViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -59,6 +62,7 @@ class AddCommunicationApproachingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -81,6 +85,7 @@ class AddCommunicationProspectingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -103,6 +108,7 @@ class AddCommunicationSuspectingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -125,6 +131,7 @@ class SuspectingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -147,6 +154,7 @@ class ProspectingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -169,6 +177,7 @@ class ApproachingViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -191,6 +200,7 @@ class NegotiationViewSet(generics.ListCreateAPIView):
 		filters.SearchFilter, 
 		filters.OrderingFilter, 
 		django_filters.rest_framework.DjangoFilterBackend,
+		DateRangeFilter
 		)
 	# filter_fields = ('medium', 'contact_person')
 	# search_fields = ('medium', 'contact_person')
@@ -203,3 +213,7 @@ class NegotiationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Negotiation.objects.all()
 	serializer_class = NegotiationSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class StatsViewSet(generics.ListCreateAPIView):
+    queryset = AddCommunication.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
+    serializer_class = StatsSerializer

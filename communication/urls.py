@@ -24,7 +24,9 @@ from .views import (
     ApproachingDetailsViewSet,
 
     NegotiationViewSet,
-    NegotiationDetailsViewSet
+    NegotiationDetailsViewSet,
+
+    StatsViewSet
 
     )
 
@@ -126,4 +128,10 @@ urlpatterns = [
         NegotiationViewSet.as_view(),
         name='get_post_negotiation'
     ),
+
+    url(
+        r'^api/v1/communication/stats/$',
+        StatsViewSet.as_view(),
+        name='get_stats_communication'
+    )
 ]

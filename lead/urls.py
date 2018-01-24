@@ -19,7 +19,7 @@ urlpatterns = [
     url(
         r'^api/lead/v1/stats/$',
         StatsViewSet.as_view(),
-        name='get_stats'
+        name='get_stats_leads'
     )
 
 ]

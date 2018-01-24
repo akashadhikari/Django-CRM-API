@@ -24,6 +24,31 @@ class AddCommunication(models.Model):
 	def __str__(self):
 		return "{}".format(self.client)
 
+	def inbound_call(self):
+		inbound_call_count = AddCommunication.objects.filter(medium='Inbound Call').count()
+		return inbound_call_count
+
+	def outbound_call(self):
+		outbound_call_count = AddCommunication.objects.filter(medium='Outbound Call').count()
+		return outbound_call_count
+
+	def inbound_email(self):
+		inbound_email_count = AddCommunication.objects.filter(medium='Inbound Email').count()
+		return inbound_email_count
+
+	def outbound_email(self):
+		outbound_email_count = AddCommunication.objects.filter(medium='Outbound Email').count()
+		return outbound_email_count
+
+	def sms(self):
+		sms_count = AddCommunication.objects.filter(medium='SMS').count()
+		return sms_count
+
+	def meeting(self):
+		meeting_count = AddCommunication.objects.filter(medium='Meeting').count()
+		return meeting_count
+
+
 class Suspecting(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_suspecting', on_delete=models.CASCADE)
