@@ -20,6 +20,7 @@ class AddCommunication(models.Model):
 	contact_person = models.CharField(max_length=255, blank=False)
 	medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)
 	sales_stage = models.CharField(max_length=255, choices=SALES_STAGE_CHOICES)
+	created = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return "{}".format(self.client)
