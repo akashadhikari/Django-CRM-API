@@ -1,26 +1,28 @@
 # LEAD MODEL ALL CHOICES LIST
 
-SERVICE_TYPE_CHOICES = (
-	("Hardware", "Hardware"),
-	("Software", "Software"),
-)
-
 CLIENT_VALUE_CHOICES = (
     ("High", "High"),
     ("Mid", "Mid"),
     ("Low", "Low")
 )
 
-POST_TYPE_CHOICES = (
+SERVICE_TYPE_CHOICES = (
     ("Top Jobs", "Top Jobs"),
     ("Hot Jobs", "Hot Jobs"),
     ("F. Post", "F. Post"),
     ("G. Post", "G. Post")
 )
 
-POST_CHOICES = (
-    ("Days Duration", "Days Duration"),
-    ("Job Unit", "Job Unit")
+STAGES_CHOICES = (
+    ("Lead Generation", "Lead Generation"),
+    ("Invoice Approval", "Invoice Approval"),
+    ("Job Post", "Job Post"),
+    ("Pre Design", "Pre Design"),
+    ("Approval On Progress", "Approval On Progress"),
+    ("Billing Process", "Billing Process"),
+    ("Payment On Progress", "Payment On Progress"),
+    ("Payment Received", "Payment Received"),
+    ("Payment Verified", "Payment Verified")
 )
 
 LAST_STATUS_CHOICES = (

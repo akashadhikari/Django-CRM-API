@@ -9,6 +9,7 @@ class LeadProcessSerializer(serializers.ModelSerializer):
 			'id',
         	'user',
         	'username',
+            'client',
         	'employer_name',
         	'client_value',
         	'client_address',
@@ -16,9 +17,8 @@ class LeadProcessSerializer(serializers.ModelSerializer):
         	'pan_no',
         	'billing_name',
         	'service_type',
-        	'post_type',
+            'stages',
         	'bulk',
-        	'post_choice',
         	'amount', 
         	'discount_entry', 
         	'discount', 
@@ -34,9 +34,11 @@ class LeadProcessSerializer(serializers.ModelSerializer):
 
 class StatsSerializer(serializers.ModelSerializer):
 
-    hardware_count = serializers.ReadOnlyField()
-    software_count = serializers.ReadOnlyField()
+    top_job = serializers.ReadOnlyField()
+    hot_job = serializers.ReadOnlyField()
+    f_post = serializers.ReadOnlyField()
+    g_post = serializers.ReadOnlyField()
 
     class Meta:
         model = LeadProcess
-        fields = ('hardware_count', 'software_count')
+        fields = ('top_job', 'hot_job', 'f_post', 'g_post')

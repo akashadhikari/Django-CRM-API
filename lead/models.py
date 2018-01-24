@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from client.models import AddClient
 from common.utils import (
 	CLIENT_VALUE_CHOICES,
 	SERVICE_TYPE_CHOICES,
-	POST_TYPE_CHOICES,
-	POST_CHOICES,
+	STAGES_CHOICES,
 	DISCOUNT_ENTRY_CHOICES,
 	LAST_STATUS_CHOICES
 )
@@ -17,7 +17,7 @@ class LeadProcess(models.Model):
 	employer_name = models.CharField(max_length=255, blank=False)
 
 	# :::CLIENT BASIC INFO:::
-
+	client = models.ForeignKey(AddClient, related_name='client_lead', on_delete=models.CASCADE)
 	client_value  = models.CharField(max_length=15, choices=CLIENT_VALUE_CHOICES)
 	client_address = models.CharField(max_length=255, blank=False)
 	contact_person = models.CharField(max_length=255, blank=False)
@@ -25,9 +25,8 @@ class LeadProcess(models.Model):
 	billing_name = models.CharField(max_length=255, blank=False)
 
 	service_type = models.CharField(max_length=15, choices=SERVICE_TYPE_CHOICES)
-	post_type = models.CharField(max_length=15, choices=POST_TYPE_CHOICES)
 	bulk = models.BooleanField(default=False)
-	post_choice = models.CharField(max_length=15, choices=POST_CHOICES)
+	stages = models.CharField(max_length=15, choices=STAGES_CHOICES)
 
 
 	# :::AMOUNT CALCULATION:::
@@ -63,13 +62,21 @@ class LeadProcess(models.Model):
 	def username(self): # defined for serializer
 		return self.user.username
 
-	def hardware_count(self):
-		count_h = LeadProcess.objects.filter(service_type='Hardware').count()
-		return count_h
+	def top_job(self):
+		count_tj = LeadProcess.objects.filter(service_type='Hardware').count()
+		return count_tj
 
-	def software_count(self):
-		count_s = LeadProcess.objects.filter(service_type='Software').count()
-		return count_s
+	def hot_job(self):
+		count_hj = LeadProcess.objects.filter(service_type='Software').count()
+		return count_hj
+
+	def f_post(self):
+		count_fp = LeadProcess.objects.filter(service_type='Hardware').count()
+		return count_fp
+
+	def g_post(self):
+		count_gp = LeadProcess.objects.filter(service_type='Software').count()
+		return count_gp
 
 	def get_billing_name(self):
 		return self.post_type + ' has billing name ' + self.billing_name

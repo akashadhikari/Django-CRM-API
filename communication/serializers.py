@@ -73,6 +73,9 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 			'communication_suspecting',
 			)
 
+		# if fields contain communication_suspecting, then sales_stages can only be Suspecting
+		# else, create a validation error
+
 	def create(self, validated_data):
 		communication_suspecting_data = validated_data.pop('communication_suspecting')
 		addcommunication = AddCommunication.objects.create(**validated_data)
@@ -119,7 +122,7 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 			'medium', 
 			'sales_stage',
 			'communication_prospecting'
-			)	
+			)
 
 	def create(self, validated_data):
 		communication_prospecting_data = validated_data.pop('communication_prospecting')

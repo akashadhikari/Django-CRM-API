@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from lead.models import LeadProcess
 from common.utils import (
 	EMPLOYEE_SIZE_CHOICES,
 	CLIENT_VALUE_CHOICES,
@@ -29,7 +28,6 @@ class AddClient(models.Model):
 	#logo = models.ImageField(upload_to = 'common/files/images', default = 'common/files/images/display.png')
 	# attachments
 	#client_pic = models.ImageField(upload_to = 'common/files/images', default = 'common/files/images/display.png')
-	#lead = models.ForeignKey(LeadProcess, related_name='lead', on_delete=models.CASCADE)
 
 
 	def __str__(self):
