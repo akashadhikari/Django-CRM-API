@@ -68,7 +68,8 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 			'user', 
 			'client', 
 			'contact_person', 
-			'medium', 
+			'medium',
+			'medium_status',
 			'sales_stage', 
 			'communication_suspecting',
 			)
@@ -89,6 +90,7 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
 
@@ -119,7 +121,8 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 			'user', 
 			'client', 
 			'contact_person', 
-			'medium', 
+			'medium',
+			'medium_status', 
 			'sales_stage',
 			'communication_prospecting'
 			)
@@ -137,6 +140,7 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
 
@@ -171,7 +175,8 @@ class AddCommunicationApproachingSerializer(serializers.ModelSerializer):
 			'user', 
 			'client', 
 			'contact_person', 
-			'medium', 
+			'medium',
+			'medium_status',
 			'sales_stage',
 			'communication_approaching'
 			)	
@@ -189,6 +194,7 @@ class AddCommunicationApproachingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_status = validated_data.get('medium', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
 
@@ -221,7 +227,8 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 			'user', 
 			'client', 
 			'contact_person', 
-			'medium', 
+			'medium',
+			'medium_status',
 			'sales_stage',
 			'communication_negotiation'
 			)	
@@ -239,6 +246,7 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
 

@@ -19,6 +19,7 @@ class AddCommunication(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_addcommunication', on_delete=models.CASCADE)
 	contact_person = models.CharField(max_length=255, blank=False)
 	medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)
+	medium_status = models.BooleanField(default=True)
 	sales_stage = models.CharField(max_length=255, choices=SALES_STAGE_CHOICES)
 	created = models.DateTimeField(auto_now_add=True)
 
@@ -87,17 +88,17 @@ class Negotiation(models.Model):
 	service_discussion = models.CharField(max_length=255, blank=False)
 	discount_discussion = models.CharField(max_length=255, blank=False)
 
-class SalesLead(models.Model):
+# class SalesLead(models.Model):
 
-	user = models.ForeignKey(User, related_name='user_saleslead', on_delete=models.CASCADE)
-	client = models.ForeignKey(AddClient, related_name='client_saleslead', on_delete=models.CASCADE)
-	communication = models.ForeignKey(AddCommunication, related_name='communication_saleslead', on_delete=models.CASCADE)
-	lead_generation = models.BooleanField(default=False)
-	invoice_approval = models.CharField(max_length=255, blank=False)
-	job_post = models.CharField(max_length=255, blank=False)
-	pre_design = models.CharField(max_length=255, blank=False)
-	approval_on_progress = models.CharField(max_length=255, blank=False)
-	billing_process = models.CharField(max_length=255, blank=False)
-	payment_on_progress = models.CharField(max_length=255, blank=False)
-	payment_received = models.CharField(max_length=255, blank=False)
-	payment_verified = models.CharField(max_length=255, blank=False)
+# 	user = models.ForeignKey(User, related_name='user_saleslead', on_delete=models.CASCADE)
+# 	client = models.ForeignKey(AddClient, related_name='client_saleslead', on_delete=models.CASCADE)
+# 	communication = models.ForeignKey(AddCommunication, related_name='communication_saleslead', on_delete=models.CASCADE)
+# 	lead_generation = models.BooleanField(default=False)
+# 	invoice_approval = models.CharField(max_length=255, blank=False)
+# 	job_post = models.CharField(max_length=255, blank=False)
+# 	pre_design = models.CharField(max_length=255, blank=False)
+# 	approval_on_progress = models.CharField(max_length=255, blank=False)
+# 	billing_process = models.CharField(max_length=255, blank=False)
+# 	payment_on_progress = models.CharField(max_length=255, blank=False)
+# 	payment_received = models.CharField(max_length=255, blank=False)
+# 	payment_verified = models.CharField(max_length=255, blank=False)
