@@ -36,9 +36,15 @@ class AddClient(models.Model):
 		return "{}".format(self.client_name)
 
 	def today_created(self):
-		# x = AddClient.objects.filter(created='2018-01-25')
+		# count the number of entries since the given date
 		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
+		return ctdays
+
+	def yesterday_created(self):
+		dayrange1 = datetime.date.today() - datetime.timedelta(1)
+		dayrange2 = datetime.date.today() - datetime.timedelta(2)
+		ctdays = AddClient.objects.filter(created__range=(dayrange1, dayrange2)).count()
 		return ctdays
 
 	def this_week_created(self):
