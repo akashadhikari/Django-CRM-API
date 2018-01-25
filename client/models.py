@@ -1,4 +1,4 @@
-import datetime
+from datetime import date, timedelta
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -35,30 +35,32 @@ class AddClient(models.Model):
 	def __str__(self):
 		return "{}".format(self.client_name)
 
+	# Calculating Today's, Yesterday's, This Week's, This month's and This year's Client count.
+
 	def today_created(self):
 		# count the number of entries since the given date
-		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+		date_from = date.today() - timedelta(1)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def yesterday_created(self):
-		dayrange1 = datetime.date.today() - datetime.timedelta(1)
-		dayrange2 = datetime.date.today() - datetime.timedelta(2)
-		ctdays = AddClient.objects.filter(created__range=(dayrange1, dayrange2)).count()
+		yesterday = date.today() - timedelta(1)
+		day_before_yesterday = date.today() - timedelta(2)
+		ctdays = AddClient.objects.filter(created__range=(yesterday, day_before_yesterday)).count()
 		return ctdays
 
 	def this_week_created(self):
-		date_from = datetime.datetime.now() - datetime.timedelta(days=7)
+		date_from = date.today() - timedelta(7)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def this_month_created(self):
-		date_from = datetime.datetime.now() - datetime.timedelta(days=30)
+		date_from = date.today() - timedelta(30)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def this_year_created(self):
-		date_from = datetime.datetime.now() - datetime.timedelta(days=365)
+		date_from = date.today() - timedelta(365)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
