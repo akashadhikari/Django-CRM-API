@@ -5,6 +5,8 @@ from .views import (
     AddClientViewSet,
     AddClientDetailsViewSet,
 
+    StatsViewSet,
+
     )
 
 
@@ -20,5 +22,11 @@ urlpatterns = [
         r'^api/v1/client/addclient/$',
         AddClientViewSet.as_view(),
         name='get_post_addclient'
+    ),
+
+    url(
+        r'^api/v1/client/stats/$',
+        StatsViewSet.as_view(),
+        name='get_stats_client'
     )
 ]

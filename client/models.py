@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -24,6 +25,7 @@ class AddClient(models.Model):
 	# ownership_type = models.CharField(max_length=255, blank=False)
 	employee_size = models.CharField(max_length=255, choices=EMPLOYEE_SIZE_CHOICES)
 	client_value  = models.CharField(max_length=15, choices=CLIENT_VALUE_CHOICES)
+	created = models.DateField(auto_now=True)
 
 	#logo = models.ImageField(upload_to = 'common/files/images', default = 'common/files/images/display.png')
 	# attachments
@@ -32,6 +34,27 @@ class AddClient(models.Model):
 
 	def __str__(self):
 		return "{}".format(self.client_name)
+
+	def today_created(self):
+		# x = AddClient.objects.filter(created='2018-01-25')
+		date_from = datetime.datetime.now() - datetime.timedelta(days=1)
+		ctdays = AddClient.objects.filter(created__gte=date_from).count()
+		return ctdays
+
+	def this_week_created(self):
+		date_from = datetime.datetime.now() - datetime.timedelta(days=7)
+		ctdays = AddClient.objects.filter(created__gte=date_from).count()
+		return ctdays
+
+	def this_month_created(self):
+		date_from = datetime.datetime.now() - datetime.timedelta(days=30)
+		ctdays = AddClient.objects.filter(created__gte=date_from).count()
+		return ctdays
+
+	def this_year_created(self):
+		date_from = datetime.datetime.now() - datetime.timedelta(days=365)
+		ctdays = AddClient.objects.filter(created__gte=date_from).count()
+		return ctdays
 
 class HeadOfOrganization(models.Model):
 

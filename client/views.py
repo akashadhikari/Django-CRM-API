@@ -22,6 +22,7 @@ from .serializers import (
 	# BusinessOutflowSerializer,
 	# ListServiceSerializer,
 	AddClientSerializer,
+	StatsSerializer
 	)
 
 class AddClientViewSet(generics.ListCreateAPIView):
@@ -46,6 +47,10 @@ class AddClientDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	queryset = AddClient.objects.all()
 	serializer_class = AddClientSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
+
+class StatsViewSet(generics.ListCreateAPIView):
+    queryset = AddClient.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
+    serializer_class = StatsSerializer
 
 # class BranchViewSet(generics.ListCreateAPIView):
 # 	queryset = Branch.objects.all()
