@@ -38,28 +38,32 @@ class AddClient(models.Model):
 	# Calculating Today's, Yesterday's, This Week's, This month's and This year's Client count.
 
 	def today_created(self):
-		# count the number of entries since the given date
+		# count the number of entries since the given date -- in this case, yesterday to today
 		date_from = date.today() - timedelta(1)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def yesterday_created(self):
+		# count the number of client entries from the day before yesterday to yesterday
 		yesterday = date.today() - timedelta(1)
 		day_before_yesterday = date.today() - timedelta(2)
 		ctdays = AddClient.objects.filter(created__range=(yesterday, day_before_yesterday)).count()
 		return ctdays
 
 	def this_week_created(self):
+		# you know the drill by now
 		date_from = date.today() - timedelta(7)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def this_month_created(self):
+		# stop reading the code comments already!
 		date_from = date.today() - timedelta(30)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays
 
 	def this_year_created(self):
+		# you're not gonna listen, are you?
 		date_from = date.today() - timedelta(365)
 		ctdays = AddClient.objects.filter(created__gte=date_from).count()
 		return ctdays

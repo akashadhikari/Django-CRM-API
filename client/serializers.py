@@ -5,9 +5,9 @@ from .models import (
 	)
 
 class AddClientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AddClient
-        fields = '__all__'
+	class Meta:
+		model = AddClient
+		fields = '__all__'
 
 class StatsSerializer(serializers.ModelSerializer):
 

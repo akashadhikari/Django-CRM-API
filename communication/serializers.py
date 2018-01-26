@@ -65,10 +65,13 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AddCommunication
 		fields = (
-			'user', 
-			'client', 
+			'user',
+			'user_name',
+			'client',
+			'client_name',
 			'contact_person', 
 			'medium',
+			'medium_direction',
 			'medium_status',
 			'sales_stage', 
 			'communication_suspecting',
@@ -90,6 +93,7 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_direction = validated_data.get('medium_direction', instance.medium_direction)
 		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
@@ -118,8 +122,10 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AddCommunication
 		fields = (
-			'user', 
-			'client', 
+			'user',
+			'user_name',
+			'client',
+			'client_name',
 			'contact_person', 
 			'medium',
 			'medium_status', 
@@ -140,6 +146,7 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_direction = validated_data.get('medium_direction', instance.medium_direction)
 		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
@@ -172,8 +179,10 @@ class AddCommunicationApproachingSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AddCommunication
 		fields = (
-			'user', 
-			'client', 
+			'user',
+			'user_name',
+			'client',
+			'client_name',
 			'contact_person', 
 			'medium',
 			'medium_status',
@@ -194,6 +203,7 @@ class AddCommunicationApproachingSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_direction = validated_data.get('medium_direction', instance.medium_direction)
 		instance.medium_status = validated_data.get('medium', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()
@@ -224,8 +234,10 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AddCommunication
 		fields = (
-			'user', 
-			'client', 
+			'user',
+			'user_name',
+			'client',
+			'client_name',
 			'contact_person', 
 			'medium',
 			'medium_status',
@@ -246,6 +258,7 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 
 		instance.contact_person = validated_data.get('contact_person', instance.contact_person)
 		instance.medium = validated_data.get('medium', instance.medium)
+		instance.medium_direction = validated_data.get('medium_direction', instance.medium_direction)
 		instance.medium_status = validated_data.get('medium_status', instance.medium_status)
 		instance.sales_stage = validated_data.get('sales_stage', instance.sales_stage)
 		instance.save()

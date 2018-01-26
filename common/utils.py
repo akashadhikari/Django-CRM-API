@@ -48,12 +48,15 @@ EMPLOYEE_SIZE_CHOICES = (
 # COMMUNICATION CHOICES
 
 MEDIUM_CHOICES = (
-    ("Inbound Call", "Inbound Call"),
-    ("Outbound Call", "Outbound Call"),
-    ("Inbound Email", "Inbound Email"),
-    ("Outbound Email", "Outbound Email"),
+    ("Call", "Call"),
+    ("Email", "Email"),
     ("SMS", "SMS"),
     ("Meeting", "Meeting"),
+)
+
+MEDIUM_DIRECTION_CHOICES = (
+    ("Inbound", "Inbound"),
+    ("Outbound", "Outbound")
 )
 
 SALES_STAGE_CHOICES = (

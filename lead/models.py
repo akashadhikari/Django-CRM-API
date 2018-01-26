@@ -55,7 +55,6 @@ class LeadProcess(models.Model):
 		elif(self.discount_entry=='Flat'):
 			return (self.amount - self.discount)
 
-	# !!!slight modifications needed for this method!!!
 	def total_invoicing_amount(self):
 		return (self.total_amount() + self.vat_percent*self.total_amount()/100)
 

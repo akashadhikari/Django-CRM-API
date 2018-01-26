@@ -6,7 +6,8 @@ from client.models import AddClient
 from common.utils import (
 
 	MEDIUM_CHOICES,
-	SALES_STAGE_CHOICES
+	SALES_STAGE_CHOICES,
+	MEDIUM_DIRECTION_CHOICES
 	
 	)
 
@@ -19,6 +20,7 @@ class AddCommunication(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_addcommunication', on_delete=models.CASCADE)
 	contact_person = models.CharField(max_length=255, blank=False)
 	medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)
+	medium_direction = models.CharField(max_length=255, choices=MEDIUM_DIRECTION_CHOICES)
 	medium_status = models.BooleanField(default=True)
 	sales_stage = models.CharField(max_length=255, choices=SALES_STAGE_CHOICES)
 	created = models.DateTimeField(auto_now_add=True)
@@ -50,12 +52,19 @@ class AddCommunication(models.Model):
 		meeting_count = AddCommunication.objects.filter(medium='Meeting').count()
 		return meeting_count
 
+	def user_name(self):
+		return self.user.username
+
+	def client_name(self):
+		return self.client.client_name
+
 
 class Suspecting(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_suspecting', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_suspecting', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_suspecting', on_delete=models.CASCADE)
+
 	contact_verification = models.CharField(max_length=255, blank=False)
 
 class Prospecting(models.Model):
@@ -63,6 +72,7 @@ class Prospecting(models.Model):
 	user = models.ForeignKey(User, related_name='user_prospecting', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_prospecting', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_prospecting', on_delete=models.CASCADE)
+
 	showed_interest_for_later = models.DateField()
 	preferred_competitors = models.CharField(max_length=255, blank=False)
 	not_interested = models.BooleanField(default=False)
@@ -70,11 +80,15 @@ class Prospecting(models.Model):
 	interest_in_other_HR = models.BooleanField(default=False)
 	remarks = models.TextField(max_length=999, blank=False)
 
+	def __str__(self):
+		return "{}".format(self.client)
+
 class Approaching(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_approaching', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_approaching', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_approaching', on_delete=models.CASCADE)
+
 	service_introduction = models.CharField(max_length=255, blank=False)
 	business_renewal = models.CharField(max_length=255, blank=False)
 	submit_proposal = models.CharField(max_length=255, blank=False)
@@ -85,6 +99,7 @@ class Negotiation(models.Model):
 	user = models.ForeignKey(User, related_name='user_negotiation', on_delete=models.CASCADE)
 	client = models.ForeignKey(AddClient, related_name='client_negotiation', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_negotiation', on_delete=models.CASCADE)
+
 	service_discussion = models.CharField(max_length=255, blank=False)
 	discount_discussion = models.CharField(max_length=255, blank=False)
 
