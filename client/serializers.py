@@ -1,13 +1,22 @@
 from rest_framework import serializers
 
 from .models import (
-	AddClient,
-	)
+    AddClient,
+    ListOfProduct
+    )
+
+class ListOfProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListOfProduct
+        fields = '__all__'
 
 class AddClientSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = AddClient
-		fields = '__all__'
+
+    #client_listofproduct = ListOfProductSerializer
+
+    class Meta:
+        model = AddClient
+        fields = '__all__'
 
 class StatsSerializer(serializers.ModelSerializer):
 

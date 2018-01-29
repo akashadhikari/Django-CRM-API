@@ -67,6 +67,9 @@ class Suspecting(models.Model):
 
 	contact_verification = models.CharField(max_length=255, blank=False)
 
+	def __str__(self):
+		return "{}".format(self.client)
+
 class Prospecting(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_prospecting', on_delete=models.CASCADE)
@@ -94,6 +97,9 @@ class Approaching(models.Model):
 	submit_proposal = models.CharField(max_length=255, blank=False)
 	presentation = models.CharField(max_length=255, blank=False)
 
+	def __str__(self):
+		return "{}".format(self.client)
+
 class Negotiation(models.Model):
 
 	user = models.ForeignKey(User, related_name='user_negotiation', on_delete=models.CASCADE)
@@ -102,6 +108,9 @@ class Negotiation(models.Model):
 
 	service_discussion = models.CharField(max_length=255, blank=False)
 	discount_discussion = models.CharField(max_length=255, blank=False)
+
+	def __str__(self):
+		return "{}".format(self.client)
 
 # class SalesLead(models.Model):
 
