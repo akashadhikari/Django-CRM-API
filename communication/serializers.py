@@ -65,6 +65,7 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = AddCommunication
 		fields = (
+			'id',
 			'user',
 			'user_name',
 			'client',
