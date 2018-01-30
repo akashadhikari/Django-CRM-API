@@ -1,4 +1,6 @@
 import django_filters.rest_framework
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import (
 	AllowAny,
@@ -29,6 +31,9 @@ from .serializers import (
 	NegotiationSerializer,
 	StatsSerializer
 	)
+from django.contrib.auth.models import User
+from django.db.models import Count
+
 
 class AddCommunicationNegotiationViewSet(generics.ListCreateAPIView):
 	queryset = AddCommunication.objects.all()
@@ -215,5 +220,71 @@ class NegotiationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
 class StatsViewSet(generics.ListCreateAPIView):
-    queryset = AddCommunication.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
-    serializer_class = StatsSerializer
+	queryset = AddCommunication.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
+	serializer_class = StatsSerializer
+
+class CoreCRMViewset(APIView):
+
+	#permission_classes = (IsAuthenticated,)
+
+	def get(self, request, format=None):
+
+		usernames = [user.username for user in User.objects.all()]
+
+		suspecting = [Suspecting.objects.all().aggregate(Count('contact_verification'))]
+
+		prospecting_stage_1 = [Prospecting.objects.all().aggregate(Count('showed_interest_for_later'))]
+		prospecting_stage_2 = [Prospecting.objects.all().aggregate(Count('preferred_competitors'))]
+		prospecting_stage_3 = [Prospecting.objects.all().aggregate(Count('not_interested'))]
+		prospecting_stage_4 = [Prospecting.objects.all().aggregate(Count('dont_call_again'))]
+		prospecting_stage_5 = [Prospecting.objects.all().aggregate(Count('interest_in_other_HR'))]
+		prospecting_stage_6 = [Prospecting.objects.all().aggregate(Count('remarks'))]
+
+		approaching_stage_1 = [Approaching.objects.all().aggregate(Count('service_introduction'))]
+		approaching_stage_2 = [Approaching.objects.all().aggregate(Count('business_renewal'))]
+		approaching_stage_3 = [Approaching.objects.all().aggregate(Count('submit_proposal'))]
+		approaching_stage_4 = [Approaching.objects.all().aggregate(Count('presentation'))]
+
+		negotiation_stage_1 = [Negotiation.objects.all().aggregate(Count('service_discussion'))]
+		negotiation_stage_2 = [Negotiation.objects.all().aggregate(Count('discount_discussion'))]
+
+		response_dict = {
+
+			"userlist" : usernames,
+
+			"suspecting" : suspecting,
+
+			"prospecting_stage_1" : prospecting_stage_1,
+			"prospecting_stage_2" : prospecting_stage_2,
+			"prospecting_stage_3" : prospecting_stage_3,
+			"prospecting_stage_4" : prospecting_stage_4,
+			"prospecting_stage_5" : prospecting_stage_5,
+			"prospecting_stage_6" : prospecting_stage_6,
+
+			"approaching_stage_1" : approaching_stage_1,
+			"approaching_stage_2" : approaching_stage_2,
+			"approaching_stage_3" : approaching_stage_3,
+			"approaching_stage_4" : approaching_stage_4,
+
+			"negotiation_stage_1" : negotiation_stage_1,
+			"negotiation_stage_2" : negotiation_stage_2
+
+			}
+
+		return Response(response_dict)
+
+# mydict = {'carl':40,
+#           'alan':2,
+#           'bob':1,
+#           'danny':3}
+
+# for key in sorted(mydict.iterkeys()):
+#     print "%s: %s" % (key, mydict[key])
+
+# >>> from communication.models import AddCommunication, Suspecting, Prospecting, Negotiation
+# >>> from django.db.models import Count
+# >>> com = Suspecting.objects.annotate(num_clients=Count('client'))
+# >>> com[0]
+# <Suspecting: Apple>
+# >>> com[0].num_clients
+# 1

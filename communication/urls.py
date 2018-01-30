@@ -26,7 +26,8 @@ from .views import (
     NegotiationViewSet,
     NegotiationDetailsViewSet,
 
-    StatsViewSet
+    StatsViewSet,
+    CoreCRMViewset,
 
     )
 
@@ -133,5 +134,11 @@ urlpatterns = [
         r'^api/v1/communication/stats/$',
         StatsViewSet.as_view(),
         name='get_stats_communication'
+    ),
+
+    url(
+        r'^api/v1/communication/corecrm/$',
+        CoreCRMViewset.as_view(),
+        name='get_corecrm_communication'
     )
 ]
