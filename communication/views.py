@@ -29,7 +29,6 @@ from .serializers import (
 	ProspectingSerializer,
 	ApproachingSerializer,
 	NegotiationSerializer,
-	StatsSerializer
 	)
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -219,9 +218,24 @@ class NegotiationDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = NegotiationSerializer
 	permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
-class StatsViewSet(generics.ListCreateAPIView):
-	queryset = AddCommunication.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
-	serializer_class = StatsSerializer
+class StatsViewSet(APIView):
+
+	def get(self ,request, format=None):
+
+		call = AddCommunication.objects.filter(medium='Call').count()
+		email = AddCommunication.objects.filter(medium='Email').count()
+		sms = AddCommunication.objects.filter(medium='SMS').count()
+		meeting = AddCommunication.objects.filter(medium='Meeting').count()
+
+		response_dict = {
+			"Call" : call,
+			"Email" : email,
+			"SMS" : sms,
+			"Meeting" : meeting,
+		}
+
+		return Response(response_dict)
+
 
 class CoreCRMViewset(APIView):
 

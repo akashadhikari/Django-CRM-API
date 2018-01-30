@@ -283,16 +283,3 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 
 		return instance
 
-class StatsSerializer(serializers.ModelSerializer):
-
-    inbound_call = serializers.ReadOnlyField()
-    outbound_call = serializers.ReadOnlyField()
-    inbound_email = serializers.ReadOnlyField()
-    outbound_email = serializers.ReadOnlyField()
-    sms = serializers.ReadOnlyField()
-    meeting = serializers.ReadOnlyField()
-
-
-    class Meta:
-        model = AddCommunication
-        fields = ('inbound_call', 'outbound_call', 'inbound_email', 'outbound_email', 'sms', 'meeting')

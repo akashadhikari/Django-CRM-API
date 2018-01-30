@@ -131,14 +131,14 @@ urlpatterns = [
     ),
 
     url(
-        r'^api/v1/communication/stats/$',
-        StatsViewSet.as_view(),
-        name='get_stats_communication'
-    ),
-
-    url(
         r'^api/v1/communication/corecrm/$',
         CoreCRMViewset.as_view(),
         name='get_corecrm_communication'
+    ),
+
+    url(
+        r'^api/v1/communication/stats/$',
+        StatsViewSet.as_view(),
+        name='get_stat_communication'
     )
 ]
