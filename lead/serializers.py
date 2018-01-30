@@ -31,14 +31,3 @@ class LeadProcessSerializer(serializers.ModelSerializer):
         	'last_service_name',
         	'created',
         )
-
-class StatsSerializer(serializers.ModelSerializer):
-
-    top_job = serializers.ReadOnlyField()
-    hot_job = serializers.ReadOnlyField()
-    f_post = serializers.ReadOnlyField()
-    g_post = serializers.ReadOnlyField()
-
-    class Meta:
-        model = LeadProcess
-        fields = ('top_job', 'hot_job', 'f_post', 'g_post')

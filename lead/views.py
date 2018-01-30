@@ -1,5 +1,6 @@
 import django_filters.rest_framework
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import (
@@ -14,7 +15,7 @@ from rest_framework import filters
 from common.filters import DateRangeFilter
 from .permissions import IsOwnerOrReadOnly
 from .models import LeadProcess
-from .serializers import LeadProcessSerializer, StatsSerializer
+from .serializers import LeadProcessSerializer
 
 # http://localhost:8000/api/lead/v1/leads/?end_date=2018-01-23&start_date=2018-01-20
 
@@ -43,7 +44,20 @@ class LeadProcessDetailsViewSet(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     #authentication_classes = [TokenAuthentication]
 
+class StatsViewSet(APIView):
 
-class StatsViewSet(generics.ListCreateAPIView):
-    queryset = LeadProcess.objects.all() # LeadProcess.objects.filter(service_type='Hardware').count()
-    serializer_class = StatsSerializer
+    def get(self ,request, format=None):
+
+        count_tj = LeadProcess.objects.filter(service_type='Top Jobs').count()
+        count_hj = LeadProcess.objects.filter(service_type='Hot Jobs').count()
+        count_fp = LeadProcess.objects.filter(service_type='F. Post').count()
+        count_gp = LeadProcess.objects.filter(service_type='G. Post').count()
+
+        response_dict = {
+            "Top Jobs" : count_tj,
+            "Hot Jobs" : count_hj,
+            "F. Post" : count_fp,
+            "G. Post" : count_gp
+        }
+
+        return Response(response_dict)

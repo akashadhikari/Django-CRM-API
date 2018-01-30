@@ -61,21 +61,6 @@ class LeadProcess(models.Model):
 	def username(self): # defined for serializer
 		return self.user.username
 
-	def top_job(self):
-		count_tj = LeadProcess.objects.filter(service_type='Hardware').count()
-		return count_tj
-
-	def hot_job(self):
-		count_hj = LeadProcess.objects.filter(service_type='Software').count()
-		return count_hj
-
-	def f_post(self):
-		count_fp = LeadProcess.objects.filter(service_type='Hardware').count()
-		return count_fp
-
-	def g_post(self):
-		count_gp = LeadProcess.objects.filter(service_type='Software').count()
-		return count_gp
 
 	def get_billing_name(self):
 		return self.post_type + ' has billing name ' + self.billing_name
