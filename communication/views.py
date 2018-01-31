@@ -245,22 +245,13 @@ class CoreCRMViewset(APIView):
 
 		usernames = [user.username for user in User.objects.all()]
 
-		suspecting = [Suspecting.objects.all().aggregate(Count('contact_verification'))]
+		suspecting = [Suspecting.objects.all().aggregate(Count('suspecting_substages'))]
 
-		prospecting_stage_1 = [Prospecting.objects.all().aggregate(Count('showed_interest_for_later'))]
-		prospecting_stage_2 = [Prospecting.objects.all().aggregate(Count('preferred_competitors'))]
-		prospecting_stage_3 = [Prospecting.objects.all().aggregate(Count('not_interested'))]
-		prospecting_stage_4 = [Prospecting.objects.all().aggregate(Count('dont_call_again'))]
-		prospecting_stage_5 = [Prospecting.objects.all().aggregate(Count('interest_in_other_HR'))]
-		prospecting_stage_6 = [Prospecting.objects.all().aggregate(Count('remarks'))]
+		prospecting = [Prospecting.objects.all().aggregate(Count('prospecting_substages'))]
 
-		approaching_stage_1 = [Approaching.objects.all().aggregate(Count('service_introduction'))]
-		approaching_stage_2 = [Approaching.objects.all().aggregate(Count('business_renewal'))]
-		approaching_stage_3 = [Approaching.objects.all().aggregate(Count('submit_proposal'))]
-		approaching_stage_4 = [Approaching.objects.all().aggregate(Count('presentation'))]
+		approaching = [Approaching.objects.all().aggregate(Count('approaching_substages'))]
 
-		negotiation_stage_1 = [Negotiation.objects.all().aggregate(Count('service_discussion'))]
-		negotiation_stage_2 = [Negotiation.objects.all().aggregate(Count('discount_discussion'))]
+		negotiation = [Negotiation.objects.all().aggregate(Count('negotiation_substages'))]
 
 		response_dict = {
 
@@ -268,20 +259,12 @@ class CoreCRMViewset(APIView):
 
 			"suspecting" : suspecting,
 
-			"prospecting_stage_1" : prospecting_stage_1,
-			"prospecting_stage_2" : prospecting_stage_2,
-			"prospecting_stage_3" : prospecting_stage_3,
-			"prospecting_stage_4" : prospecting_stage_4,
-			"prospecting_stage_5" : prospecting_stage_5,
-			"prospecting_stage_6" : prospecting_stage_6,
+			"prospecting" : prospecting,
 
-			"approaching_stage_1" : approaching_stage_1,
-			"approaching_stage_2" : approaching_stage_2,
-			"approaching_stage_3" : approaching_stage_3,
-			"approaching_stage_4" : approaching_stage_4,
+			"approaching" : approaching,
 
-			"negotiation_stage_1" : negotiation_stage_1,
-			"negotiation_stage_2" : negotiation_stage_2
+			"negotiation" : negotiation,
+
 
 			}
 
