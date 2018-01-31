@@ -15,8 +15,8 @@ class SuspectingSerializer(serializers.ModelSerializer):
 		fields = (
 			'user', 
 			'client', 
-			'contact_verification', 
-			'communication'
+			'communication', 
+			'suspecting_substages'
 			)
 
 class ProspectingSerializer(serializers.ModelSerializer):
@@ -27,12 +27,7 @@ class ProspectingSerializer(serializers.ModelSerializer):
 			'user',
 			'client',
 			'communication',
-			'showed_interest_for_later',
-			'preferred_competitors',
-			'not_interested',
-			'dont_call_again',
-			'interest_in_other_HR',
-			'remarks'
+			'prospecting_substages',
 			)
 
 class ApproachingSerializer(serializers.ModelSerializer):
@@ -41,11 +36,9 @@ class ApproachingSerializer(serializers.ModelSerializer):
 		model = Approaching
 		fields = (
 			'user',
+			'client',
 			'communication',
-			'service_introduction',
-			'business_renewal',
-			'submit_proposal',
-			'presentation'
+			'approaching_substages'
 			)
 
 class NegotiationSerializer(serializers.ModelSerializer):
@@ -54,8 +47,9 @@ class NegotiationSerializer(serializers.ModelSerializer):
 		model = Negotiation
 		fields = (
 			'user',
-			'service_discussion',
-			'discount_discussion'
+			'client',
+			'communication',
+			'negotiation_substages'
 			)
 
 class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
@@ -108,7 +102,7 @@ class AddCommunicationSuspectingSerializer(serializers.ModelSerializer):
 					# get native fields + linked foreign field of the model to be nested
 					comm_susp = Suspecting.objects.get(id=comm_id, communication=instance)
 					comm_susp.communication = each.get('communication', comm_susp.communication)
-					comm_susp.contact_verification = each.get('contact_verification', comm_susp.contact_verification)
+					comm_susp.suspecting_substages = each.get('suspecting_substages', comm_susp.suspecting_substages)
 
 					comm_susp.save()
 				else:
@@ -161,12 +155,7 @@ class AddCommunicationProspectingSerializer(serializers.ModelSerializer):
 					# get native fields + linked foreign field of the model to be nested
 					comm_prosp = Prospecting.objects.get(id=comm_id, communication=instance)
 					comm_prosp.communication = each.get('communication', comm_prosp.communication)
-					comm_prosp.showed_interest_for_later = each.get('showed_interest_for_later', comm_prosp.showed_interest_for_later)
-					comm_prosp.preferred_competitors = each.get('preferred_competitors', comm_prosp.preferred_competitors)
-					comm_prosp.not_interested = each.get('not_interested', comm_prosp.not_interested)
-					comm_prosp.dont_call_again = each.get('dont_call_again', comm_prosp.dont_call_again)
-					comm_prosp.interest_in_other_HR = each.get('interest_in_other_HR', comm_prosp.interest_in_other_HR)
-					comm_prosp.remarks = each.get('remarks', comm_prosp.remarks)
+					comm_prosp.prospecting_substages = each.get('prospecting_substages', comm_prosp.prospecting_substages)
 					comm_prosp.save()
 				else:
 					Prospecting.objects.create(account=instance, **each)
@@ -218,11 +207,7 @@ class AddCommunicationApproachingSerializer(serializers.ModelSerializer):
 					# get native fields + linked foreign field of the model to be nested
 					comm_appr = Approaching.objects.get(id=comm_id, communication=instance)
 					comm_appr.communication = each.get('communication', comm_appr.communication)
-					comm_appr.service_introduction = each.get('service_introduction', comm_appr.service_introduction)
-					comm_appr.business_renewal = each.get('business_renewal', comm_appr.business_renewal)
-					comm_appr.submit_proposal = each.get('submit_proposal', comm_appr.submit_proposal)
-					comm_appr.presentation = each.get('presentation', comm_appr.presentation)
-					comm_appr.save()
+					comm_appr.approaching_substages = each.get('approaching_substages', comm_appr.approaching_substages)
 				else:
 					Approaching.objects.create(account=instance, **each)
 
@@ -273,10 +258,7 @@ class AddCommunicationNegotiationSerializer(serializers.ModelSerializer):
 					# get native fields + linked foreign field of the model to be nested
 					comm_neg = Negotiation.objects.get(id=comm_id, communication=instance)
 					comm_neg.communication = each.get('communication', comm_neg.communication)
-					comm_neg.service_introduction = each.get('service_introduction', comm_neg.service_introduction)
-					comm_neg.business_renewal = each.get('business_renewal', comm_neg.business_renewal)
-					comm_neg.submit_proposal = each.get('submit_proposal', comm_neg.submit_proposal)
-					comm_neg.presentation = each.get('presentation', comm_neg.presentation)
+					comm_neg.negotiation_substages = each.get('negotiation_substages', comm_neg.negotiation_substages)
 					comm_neg.save()
 				else:
 					Negotiation.objects.create(account=instance, **each)

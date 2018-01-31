@@ -67,3 +67,30 @@ SALES_STAGE_CHOICES = (
     ("Sales Lead", "Sales Lead"),
     ("Value Proposition", "Value Proposition")
 )
+
+SUSPECTING_CHOICES = (
+    ("s1", "Contact Verification"),
+)
+
+PROSPECTING_CHOICES = (
+    ("p1", "Add Client Detail"),
+    ("p2", "Introduce Service"),
+    ("p3", "Showed Interest For Now"),
+    ("p4", "Showed Interest For Later"),
+    ("p5", "Preferred Competitors"),
+    ("p6", "Not Interested"),
+    ("p7", "Dont Call Me Again"),
+    ("p8", "Interest In Other HR Service")
+)
+
+APPROACHING_CHOICES = (
+    ("a1", "Service Introduction"),
+    ("a2", "Business Renewal"),
+    ("a3", "Submit Proposal"),
+    ("a4", "Presentation")
+)
+
+NEGOTIATION_CHOICES = (
+    ("n1", "Service Discussion"),
+    ("n2", "Discount Discussion")
+)

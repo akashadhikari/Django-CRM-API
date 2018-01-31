@@ -7,7 +7,12 @@ from common.utils import (
 
 	MEDIUM_CHOICES,
 	SALES_STAGE_CHOICES,
-	MEDIUM_DIRECTION_CHOICES
+	MEDIUM_DIRECTION_CHOICES,
+
+	SUSPECTING_CHOICES,
+	PROSPECTING_CHOICES,
+	APPROACHING_CHOICES,
+	NEGOTIATION_CHOICES,
 	
 	)
 
@@ -41,7 +46,7 @@ class Suspecting(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_suspecting', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_suspecting', on_delete=models.CASCADE)
 
-	contact_verification = models.CharField(max_length=255, blank=False)
+	suspecting_substages = models.CharField(max_length=255, choices=SUSPECTING_CHOICES)
 
 	def __str__(self):
 		return "{}".format(self.client)
@@ -52,12 +57,7 @@ class Prospecting(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_prospecting', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_prospecting', on_delete=models.CASCADE)
 
-	showed_interest_for_later = models.DateField()
-	preferred_competitors = models.CharField(max_length=255, blank=False)
-	not_interested = models.BooleanField(default=False)
-	dont_call_again = models.BooleanField(default=False)
-	interest_in_other_HR = models.BooleanField(default=False)
-	remarks = models.TextField(max_length=999, blank=False)
+	prospecting_substages = models.CharField(max_length=255, choices=PROSPECTING_CHOICES)
 
 	def __str__(self):
 		return "{}".format(self.client)
@@ -68,10 +68,7 @@ class Approaching(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_approaching', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_approaching', on_delete=models.CASCADE)
 
-	service_introduction = models.CharField(max_length=255, blank=False)
-	business_renewal = models.CharField(max_length=255, blank=False)
-	submit_proposal = models.CharField(max_length=255, blank=False)
-	presentation = models.CharField(max_length=255, blank=False)
+	approaching_substages = models.CharField(max_length=255, choices=APPROACHING_CHOICES)
 
 	def __str__(self):
 		return "{}".format(self.client)
@@ -82,8 +79,7 @@ class Negotiation(models.Model):
 	client = models.ForeignKey(AddClient, related_name='client_negotiation', on_delete=models.CASCADE)
 	communication = models.ForeignKey(AddCommunication, related_name='communication_negotiation', on_delete=models.CASCADE)
 
-	service_discussion = models.CharField(max_length=255, blank=False)
-	discount_discussion = models.CharField(max_length=255, blank=False)
+	negotiation_substages = models.CharField(max_length=255, choices=NEGOTIATION_CHOICES)
 
 	def __str__(self):
 		return "{}".format(self.client)
