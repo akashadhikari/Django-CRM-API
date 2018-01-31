@@ -68,6 +68,8 @@ SALES_STAGE_CHOICES = (
     ("Value Proposition", "Value Proposition")
 )
 
+# COMMUNICATION SALES STAGES CHOICES
+
 SUSPECTING_CHOICES = (
     ("s1", "Contact Verification"),
 )

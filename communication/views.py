@@ -265,23 +265,6 @@ class CoreCRMViewset(APIView):
 
 			"negotiation" : negotiation,
 
-
 			}
 
 		return Response(response_dict)
-
-# mydict = {'carl':40,
-#           'alan':2,
-#           'bob':1,
-#           'danny':3}
-
-# for key in sorted(mydict.iterkeys()):
-#     print "%s: %s" % (key, mydict[key])
-
-# >>> from communication.models import AddCommunication, Suspecting, Prospecting, Negotiation
-# >>> from django.db.models import Count
-# >>> com = Suspecting.objects.annotate(num_clients=Count('client'))
-# >>> com[0]
-# <Suspecting: Apple>
-# >>> com[0].num_clients
-# 1
