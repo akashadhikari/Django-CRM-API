@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'debug_toolbar',
+    'rest_framework_swagger',
 
     # Django Apps
     'lead',

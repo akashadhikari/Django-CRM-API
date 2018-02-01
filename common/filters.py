@@ -3,7 +3,11 @@ from rest_framework.filters import BaseFilterBackend
 
 class DateRangeFilter(BaseFilterBackend):
     """
+    
     Filter that filters created date range
+
+    ?end_date=2018-01-23&start_date=2018-01-20
+
     """
     def filter_queryset(self, request, queryset, view):
         start_date = request.query_params.get('start_date')

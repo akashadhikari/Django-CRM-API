@@ -17,8 +17,6 @@ from .permissions import IsOwnerOrReadOnly
 from .models import LeadProcess
 from .serializers import LeadProcessSerializer
 
-# http://localhost:8000/api/lead/v1/leads/?end_date=2018-01-23&start_date=2018-01-20
-
 
 class LeadProcessViewSet(generics.ListCreateAPIView):
     queryset = LeadProcess.objects.all()
