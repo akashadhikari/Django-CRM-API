@@ -1,5 +1,10 @@
 from django.conf.urls import url
-from .views import LeadProcessViewSet, LeadProcessDetailsViewSet, StatsViewSet
+
+from .views import (
+    LeadProcessViewSet,
+    LeadProcessDetailsViewSet,
+    StatsViewSet
+    )
 
 
 urlpatterns = [

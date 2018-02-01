@@ -1,7 +1,8 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
-from ..models import ClientDetail, SalesStage, SalesSub
-from lead.models import LeadProcess
+# from django.test import TestCase
+# from django.contrib.auth.models import User
+
+# from ..models import ClientDetail, SalesStage, SalesSub
+# from lead.models import LeadProcess
 
 
 # class ClientDetailTest(TestCase):

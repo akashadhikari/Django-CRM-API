@@ -1,5 +1,5 @@
-import django_filters.rest_framework
 from datetime import date, timedelta
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics
@@ -10,8 +10,8 @@ from rest_framework.permissions import (
 	IsAdminUser,
 	IsAuthenticatedOrReadOnly,
 	)
-
 from rest_framework import filters
+import django_filters.rest_framework
 
 from .permissions import IsOwnerOrReadOnly
 from .models import (

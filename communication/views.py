@@ -1,4 +1,6 @@
-import django_filters.rest_framework
+from django.contrib.auth.models import User
+from django.db.models import Count
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics
@@ -8,8 +10,8 @@ from rest_framework.permissions import (
 	IsAdminUser,
 	IsAuthenticatedOrReadOnly,
 	)
-
 from rest_framework import filters
+import django_filters.rest_framework
 
 from common.filters import DateRangeFilter
 from .permissions import IsOwnerOrReadOnly
@@ -30,8 +32,6 @@ from .serializers import (
 	ApproachingSerializer,
 	NegotiationSerializer,
 	)
-from django.contrib.auth.models import User
-from django.db.models import Count
 
 
 class AddCommunicationNegotiationViewSet(generics.ListCreateAPIView):
