@@ -222,6 +222,8 @@ class StatsViewSet(APIView):
 
 	def get(self ,request, format=None):
 
+		# this query needs to be optimized
+
 		call = AddCommunication.objects.filter(medium='Call').count()
 		email = AddCommunication.objects.filter(medium='Email').count()
 		sms = AddCommunication.objects.filter(medium='SMS').count()
@@ -235,6 +237,11 @@ class StatsViewSet(APIView):
 		}
 
 		return Response(response_dict)
+
+'''
+!!! Warning: Construction work ahead !!!
+
+'''
 
 
 class CoreCRMViewset(APIView):

@@ -83,18 +83,3 @@ class Negotiation(models.Model):
 
 	def __str__(self):
 		return "{}".format(self.client)
-
-# class SalesLead(models.Model):
-
-# 	user = models.ForeignKey(User, related_name='user_saleslead', on_delete=models.CASCADE)
-# 	client = models.ForeignKey(AddClient, related_name='client_saleslead', on_delete=models.CASCADE)
-# 	communication = models.ForeignKey(AddCommunication, related_name='communication_saleslead', on_delete=models.CASCADE)
-# 	lead_generation = models.BooleanField(default=False)
-# 	invoice_approval = models.CharField(max_length=255, blank=False)
-# 	job_post = models.CharField(max_length=255, blank=False)
-# 	pre_design = models.CharField(max_length=255, blank=False)
-# 	approval_on_progress = models.CharField(max_length=255, blank=False)
-# 	billing_process = models.CharField(max_length=255, blank=False)
-# 	payment_on_progress = models.CharField(max_length=255, blank=False)
-# 	payment_received = models.CharField(max_length=255, blank=False)
-# 	payment_verified = models.CharField(max_length=255, blank=False)
